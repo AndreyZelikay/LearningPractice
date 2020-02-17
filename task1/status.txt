@@ -1,0 +1,14 @@
+On branch task1
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   LearningPractice.iml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .idea/
+        src/
+On branch task1
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        src/
+        task1/
