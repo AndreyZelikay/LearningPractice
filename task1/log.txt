@@ -1,0 +1,17 @@
+commit 1c1d625845648f1f2fb471adbb484b32248ad730 (HEAD -> task1)
+Author: AZelikov <andrey.zelikay@gmail.com>
+Date:   Mon Feb 17 18:38:05 2020 +0300
+
+    add status.txt
+
+commit e0c408c5ee3911b358ce7d2c860027dde18eeac2
+Author: AZelikov <andrey.zelikay@gmail.com>
+Date:   Mon Feb 17 18:36:37 2020 +0300
+
+    add .gitignore
+
+commit a6d4335b45d01e96779c10f071aa7da99929430e (origin/master, origin/HEAD, master)
+Author: AndreyZelikay <49722390+AndreyZelikay@users.noreply.github.com>
+Date:   Mon Feb 17 18:21:33 2020 +0300
+
+    Initial commit
