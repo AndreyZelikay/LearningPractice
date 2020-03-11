@@ -1,4 +1,4 @@
-.userIcon {
+.user-icon {
   position: absolute;
   border-radius: 100%;
   box-shadow: 0 0 7px #666;
@@ -66,14 +66,6 @@
   font-size: 100%;
 }
 
-.button.up {
-  position: absolute;
-  display: inline-block;
-  visibility: hidden;
-  left: 3%;
-  bottom: 10px;
-}
-
 .icon {
   position: relative;
   visibility: visible;
@@ -83,53 +75,33 @@
   color: #4060A1;
 }
 
-.upCounter {
+.feedback {
   position: absolute;
-  font-family: Oxygen, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 75%;
-  left: 7%;
-  text-align: left;
   bottom: 10px;
+  left: 10px;
+  width: 170px;
+  height: 30px;
 }
 
-.button.down {
-  position: absolute;
+.feedback-button, .feedback-counter {
+  position: relative;
+  display: inline-block;
+  margin-left: 0;
+}
+
+.feedback-button {
   visibility: hidden;
-  color: brown;
-  left: 12%;
-  bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.downCounter {
-  position: absolute;
+.feedback-counter {
   font-family: Oxygen, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 75%;
-  left: 16%;
   text-align: left;
-  bottom: 10px;
-}
-
-.button.forum {
-  position: absolute;
-  visibility: hidden;
-  color: orange;
-  left: 20%;
-  bottom: 10px;
-}
-
-.commentsCounter {
-  position: absolute;
-  font-family: Oxygen, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 75%;
-  left: 25%;
-  text-align: left;
-  bottom: 10px;
+  margin-right: 10px;
 }
 
 html, body{
@@ -138,44 +110,52 @@ html, body{
   height: 100%;
   overflow: hidden;
 }
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
+header, footer {
+  position: absolute;
   width: 100%;
-  height: 9%;
+  height: 10%;
+  max-height: 120px;
+  min-height: 90px;
   background: #4060A1;
 }
+
+header {
+  top: 0;
+  left: 0;
+}
+
+footer {
+  bottom: 0;
+  left: 0;
+}
+
 .logo {
+  position: absolute;
+  top: 0;
+  left: 30px;
   height: 100%;
-  margin-left: 3%;
+  max-height: 120px;
+  min-height: 0;
 }
 
 .context {
   position: absolute;
-  top: 11%;
-  bottom: 9%;
-  width: 45%;
-  left: 28.5%;
+  top: 10%;
+  bottom: 10%;
+  width: 700px;
+  left: calc((100% - 700px)/2);
   height: 80%;
   overflow: scroll;
-}
-
-footer {
-  position: fixed;
-  width: 100%;
-  height: 9%;
-  bottom: 0;
-  left: 0;
-  background: #4060A1;
 }
 
 footer p {
   position: absolute;
   font-family: "Roboto Light", sans-serif ;
-  font-size: 100%;
-  right: 3%;
-  vertical-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1rem;
+  right: 20px;
+  text-align: right;
 }
 
 .twit {
@@ -185,7 +165,7 @@ footer p {
   width: 100%;
 }
 
-.button.seeMore {
+.button.see-more {
   position: absolute;
   top: 0;
   left: 0;
@@ -193,7 +173,7 @@ footer p {
   height: 100%;
 }
 
-.seeMore {
+.see-more {
   position: relative;
   display: inline-block;
   margin-top: 5%;
@@ -205,47 +185,43 @@ footer p {
   border-radius: 20px;
 }
 
-.inputField {
-  position: relative;
-  bottom: 40%;
+.input-field {
+  position: absolute;
+  top: 28.5%;
   width: 40%;
   height: 45%;
-  left: 22%;
+  left: 30%;
   padding-left: 2%;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.5rem;
   color: #B7AEAE;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
 }
 
-.button.myProfile {
-  position: relative;
-  bottom: 40%;
-  left: 33%;
+.button.my-profile {
+  position: absolute;
+  right: 30px;
   visibility: hidden;
 }
 
-.button.logOut {
-  position: relative;
-  bottom: 40%;
-  left: 35%;
+.button.log-out {
+  position: absolute;
+  right: 150px;
   visibility: hidden;
 }
 
-.buttonText {
+.button-text {
   position: relative;
+  bottom:5px;
   visibility: visible;
-  top: 0;
-  left: 0;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
-
+  font-size: 2rem;
   color: #DEE58D;
 }
 
@@ -259,10 +235,10 @@ footer p {
 }
 
 .button.menu {
-  position: relative;
+  position: absolute;
   visibility: hidden;
-  bottom: 25%;
-  left: 6%;
+  top: 28.5%;
+  right: 30%;
 }
 
 .menu.icon {
@@ -273,76 +249,178 @@ footer p {
 }
 
 .filtration {
-  position: relative;
+  position: absolute;
+  padding-top: 10px;
+  padding-left: 20px;
   z-index: 1;
-  top:7%;
-  left:28.5%;
-  width: 43%;
-  height: 5%;
+  bottom: -30px;
+  left: 27.5%;
+  width: 45%;
+  height: 50%;
   background: rgba(255, 247, 247, 0.97);
   border: 1px solid #AFB5BD;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 
-.userNameFilter {
-  position: relative;
-  top:5%;
-  left: 3%;
-  width: 30%;
+.user-name-filter,.date-from-filter,.date-to-filter {
+  display: inline-block;
+  top: 10px;
   height: 80%;
-  font-family: Roboto;
+  position: relative;
+  margin-right: 10px;
+  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1rem;
 }
 
-.userNameFilter.input {
-  position: relative;
-  top: 0;
-  left: 5px;
-  width: 30%;
-  height: 80%;
+.user-name-filter {
+  width: 40%;
+}
+
+.date-from-filter, .date-to-filter {
+  width: 27%;
+}
+
+.user-name-filter.input, .date.input {
+  position: absolute;
+  top: -5px;
+  padding-left: 10px;
   border-radius: 10px;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
 }
 
-.dateFromFilter {
-  position: relative;
-  top: 5%;
-  left: 4%;
-  width: 15%;
-  height: 80%;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-}
-
-.dateToFilter {
-  position: relative;
-  top: 5%;
-  left: 5%;
-  width: 15%;
-  height: 80%;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+.user-name-filter.input {
+  left: 30%;
+  width: 70%;
 }
 
 .date.input {
-  position: relative;
-  top: 0;
-  left: 5px;
-  width: 14%;
-  height: 80%;
-  border-radius: 10px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  left: 40%;
+  width: 60%;
+}
+
+@media (max-width: 1550px) {
+  .filtration {
+    position: absolute;
+    padding-top: 10px;
+    padding-left: 20px;
+    z-index: 1;
+    top: 105%;
+    left: calc((100% - 350px)/2);
+    width: 350px;
+    height: 150px;
+    background: rgba(255, 247, 247, 0.97);
+    border: 1px solid #AFB5BD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+
+  .user-name-filter,.date-from-filter,.date-to-filter {
+    display: block;
+    top: 10px;
+    height: 30%;
+    position: relative;
+    margin-right: 10px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+  }
+
+  .user-name-filter {
+    width: 100%;
+  }
+
+  .date-from-filter, .date-to-filter {
+    width: 100%;
+  }
+
+  .user-name-filter.input, .date.input {
+    position: absolute;
+    top: -3px;
+    padding-left: 10px;
+    border-radius: 10px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+  }
+
+  .user-name-filter.input {
+    left: 25%;
+    width: 70%;
+    height: 60%;
+  }
+
+  .date.input {
+    left: 25%;
+    width: 40%;
+  }
+}
+
+@media (max-width: 1250px) {
+  .button.my-profile {
+    position: absolute;
+    right: 30px;
+    top: 27%;
+    visibility: hidden;
+  }
+
+  .button.log-out {
+    position: absolute;
+    right: 30px;
+    bottom: 20%;
+    visibility: hidden;
+  }
+
+  .button-text {
+    position: relative;
+    bottom:5px;
+    visibility: visible;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.65rem;
+    color: #DEE58D;
+  }
+}
+
+@media (max-width: 720px) {
+  .context {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    width: 100%;
+    left: 0;
+    height: 80%;
+    overflow: scroll;
+  }
+}
+
+@media (max-height: 900px) {
+  .context {
+    position: absolute;
+    top: 90px;
+    bottom: 90px;
+    width: 700px;
+    left: calc((100% - 700px)/2);
+    height: calc(100% - 180px);
+    overflow: scroll;
+  }
+  @media (max-width: 720px) {
+    .context {
+      position: absolute;
+      top: 90px;
+      bottom: 90px;
+      width: 100%;
+      left: 0;
+      height: calc(100% - 180px);
+      overflow: scroll;
+    }
+  }
 }

@@ -3,52 +3,55 @@
   <body>
     <header>
       <img class="logo" src="Logo.png">
-      <input class="inputField" placeholder="Find your topic">
-      <button class="button myProfile"><p class="buttonText">Andrei</p></button>
-      <button class="button logOut"><p class="buttonText">Log out</p></button>
+      <input class="input-field" placeholder="Find your topic">
+      <button class="button my-profile"><p class="button-text">Andrei</p></button>
+      <button class="button log-out"><p class="button-text">Log out</p></button>
       <button class="button menu"><img src="menu.png" class="menu icon"></button>
+      <div class="filtration">
+        <label class="user-name-filter">User name<input type="text" placeholder="name" class="user-name-filter input"></label>
+        <label class="date-from-filter">Date from:<input type="text" placeholder="02 03 2020" class="date input"></label>
+        <label class="date-to-filter">Date until:<input type="text" placeholder="02 03 2020" class="date input"></label>
+      </div>
     </header>
-
-    <div class="filtration">
-      <label class="userNameFilter">User name<input type="text" placeholder="name" class="userNameFilter input"></label>
-      <label class="dateFromFilter">Date from:<input type="text" placeholder="02 03 2020" class="date input"></label>
-      <label class="dateToFilter">Date to:<input type="text" placeholder="02 03 2020" class="date input"></label>
-    </div>
 
     <div class="context">
       <div class="twit">
-	      <img class="userIcon" src="Logo.png">
-        <div class="content">
-          <p class="date">01.03.2020</p>
-          <p class = "text">КНОПКИ ЛАЙКОВ И ДИЗЛАКОЙВ ИЗМЕНЕЫ НА СТРЕЛКИ ВВЕРХ И ВНИЗ СООТВЕТСТВЕННО!!!!</p>
-          <img src="logo.png" class="twit photo">
-          <p class="name">Andrei</p>
-      	  <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-      	  <p class="upCounter">100</p>
-      	  <button class = "button down"><img class="icon" src="downward.png"></button>
-      	  <p class="downCounter">50</p>
-      	  <button class="button forum"><img class="icon" src="forum.png"></button>
-     	    <p class="commentsCounter">30</p>
+	      <img class="user-icon" src="Logo.png">
+          <div class="content">
+            <p class="date">01.03.2020</p>
+            <p class = "text">КНОПКИ ЛАЙКОВ И ДИЗЛАКОЙВ ИЗМЕНЕЫ НА СТРЕЛКИ ВВЕРХ И ВНИЗ СООТВЕТСТВЕННО!!!!</p>
+            <img src="logo.png" class="twit photo">
+            <p class="name">Andrei</p>
+            <p class="tags">#truth#absolutely#up</p>
+            <div class="feedback">
+              <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+              <p class="feedback-counter">100</p>
+              <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+              <p class="feedback-counter">50</p>
+              <button class="feedback-button"><img class="icon" src="forum.png"></button>
+              <p class="feedback-counter">30</p>
+            </div>
 	      </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">КНОПКА ДОБАВЛЕНИЯ ПОСТА БУДЕТ В ПРОФИЛЕ ПОЛЬЗОВАТЕЛЯ!!!!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">Тёплое место
@@ -74,166 +77,137 @@
           </p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
       <div class="twit">
-        <img class="userIcon" src="Logo.png">
+        <img class="user-icon" src="Logo.png">
         <div class="content">
           <p class="date">01.03.2020</p>
           <p class = "text">In my opinion you are bad guy!!!!</p>
           <p class="name">Andrei</p>
           <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
+          <div class="feedback">
+            <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+            <p class="feedback-counter">100</p>
+            <button class = "feedback-button"><img class="icon" src="downward.png"></button>
+            <p class="feedback-counter">50</p>
+            <button class="feedback-button"><img class="icon" src="forum.png"></button>
+            <p class="feedback-counter">30</p>
+          </div>
         </div>
       </div>
-      <div class="twit">
-        <img class="userIcon" src="Logo.png">
-        <div class="content">
-          <p class="date">01.03.2020</p>
-          <p class = "text">In my opinion you are bad guy!!!!</p>
-          <p class="name">Andrei</p>
-          <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
-        </div>
-      </div>
-      <div class="twit">
-        <img class="userIcon" src="Logo.png">
-        <div class="content">
-          <p class="date">01.03.2020</p>
-          <p class = "text">In my opinion you are bad guy!!!!</p>
-          <p class="name">Andrei</p>
-          <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
-        </div>
-      </div>
-      <div class="twit">
-        <img class="userIcon" src="Logo.png">
-        <div class="content">
-          <p class="date">01.03.2020</p>
-          <p class = "text">In my opinion you are bad guy!!!!</p>
-          <p class="name">Andrei</p>
-          <p class="tags">#truth#absolutely#up</p>
-          <button class = "button up"><img class = "icon" src="upward.png"></button>
-          <p class="upCounter">100</p>
-          <button class = "button down"><img class="icon" src="downward.png"></button>
-          <p class="downCounter">50</p>
-          <button class="button forum"><img class="icon" src="forum.png"></button>
-          <p class="commentsCounter">30</p>
-        </div>
-      </div>
-      <div class="seeMore">
-        <button class="button seeMore">See more</button>
+      <div class="see-more">
+        <button class="button see-more">See more</button>
       </div>
     </div>
 
