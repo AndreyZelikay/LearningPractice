@@ -1,5 +1,10 @@
-<link rel="stylesheet" type="text/css" href="style.css">
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>Opinion</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
   <body>
     <header>
       <img class="logo" src="Logo.png">
@@ -8,9 +13,9 @@
       <button class="button log-out"><p class="button-text">Log out</p></button>
       <button class="button menu"><img src="menu.png" class="menu icon"></button>
       <div class="filtration">
-        <label class="user-name-filter">User name<input type="text" placeholder="name" class="user-name-filter input"></label>
-        <label class="date-from-filter">Date from:<input type="text" placeholder="02 03 2020" class="date input"></label>
-        <label class="date-to-filter">Date until:<input type="text" placeholder="02 03 2020" class="date input"></label>
+        <label class="user-name-filter" for="userName">User name<input id="userName" type="text" placeholder="name" class="user-name-filter input"></label>
+        <label class="date-from-filter" for="dateFrom">Date from:<input id="dateFrom" type="text" placeholder="02 03 2020" class="date input"></label>
+        <label class="date-to-filter" for="dateUntil">Date until:<input id="dateUntil" type="text" placeholder="02 03 2020" class="date input"></label>
       </div>
     </header>
 
