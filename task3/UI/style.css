@@ -1,0 +1,428 @@
+.user-icon {
+	position: absolute;
+	border-radius: 100%;
+	box-shadow: 0 0 7px #666;
+	width: 15%;
+	top: 0;
+	left: 0;
+}
+
+.content {
+	position: relative;
+	display: inline-block;
+	left: 19%;
+	right: 0;
+	margin-top: 0;
+	bottom: 0;
+	width: 80%;
+	min-height: 18%;
+	border-radius: 10px;
+	background: rgba(255, 247, 247, 0.97);
+	border: 1px solid #AFB5BD;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.date {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-family: Oxygen, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 90%;
+}
+
+.text {
+	position: relative;
+	display: inline-block;
+	margin-top: 45px;
+	margin-left: 15px;
+	margin-bottom: 40px;
+	width: 75%;
+	font-family: Oxygen, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 100%;
+}
+
+.name {
+	position: absolute;
+	top: 0;
+	left: 15px;
+	font-family: Oxygen, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 110%;
+}
+
+.tags {
+	position: absolute;
+	word-wrap: break-word;
+	width: 20%;
+	top: 30px;
+	right: 10px;
+	font-family: Oxygen, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 100%;
+}
+
+.icon {
+	position: relative;
+	visibility: visible;
+	display: inline-block;
+	margin-top: 0;
+	margin-left: 0;
+	color: #4060A1;
+}
+
+.feedback {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 170px;
+	height: 30px;
+}
+
+.feedback-button, .feedback-counter {
+	position: relative;
+	display: inline-block;
+	margin-left: 0;
+}
+
+.feedback-button {
+	visibility: hidden;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.feedback-counter {
+	font-family: Oxygen, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 75%;
+	text-align: left;
+	margin-right: 10px;
+}
+
+html, body {
+	position: static;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+header, footer {
+	position: absolute;
+	width: 100%;
+	height: 10%;
+	max-height: 120px;
+	min-height: 90px;
+	background: #4060A1;
+}
+
+header {
+	top: 0;
+	left: 0;
+}
+
+footer {
+	bottom: 0;
+	left: 0;
+}
+
+.logo {
+	position: absolute;
+	top: 0;
+	left: 30px;
+	height: 100%;
+	max-height: 120px;
+	min-height: 0;
+}
+
+.context {
+	position: absolute;
+	top: 10%;
+	bottom: 10%;
+	width: 700px;
+	left: calc((100% - 700px) / 2);
+	height: 80%;
+	overflow: scroll;
+}
+
+footer p {
+	position: absolute;
+	font-family: "Roboto Light", sans-serif;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 1rem;
+	right: 20px;
+	text-align: right;
+}
+
+.twit {
+	margin-top: 5%;
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.button.see-more {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.see-more {
+	position: relative;
+	display: inline-block;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	height: 5%;
+	width: 30%;
+	left: 35%;
+	background: #F7F8FB;
+	border-radius: 20px;
+}
+
+.input-field {
+	position: absolute;
+	top: 28.5%;
+	width: 40%;
+	height: 45%;
+	left: 30%;
+	padding-left: 2%;
+	font-family: Roboto, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.5rem;
+	color: #B7AEAE;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 50px;
+}
+
+.button.my-profile, .button.log-out {
+	position: absolute;
+	visibility: hidden;
+}
+
+.button.my-profile {
+	right: 30px;
+}
+
+.button.log-out {
+	right: 150px;
+}
+
+.button-text {
+	position: relative;
+	bottom: 5px;
+	visibility: visible;
+	font-family: Roboto, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 2rem;
+	color: #DEE58D;
+}
+
+.twit.photo {
+	position: relative;
+	display: inline-block;
+	margin: 45px 0 40px 15px;
+	width: 75%;
+}
+
+.button.menu {
+	position: absolute;
+	visibility: hidden;
+	top: 28.5%;
+	right: 30%;
+}
+
+.menu.icon {
+	position: relative;
+	top: 0;
+	left: 0;
+	visibility: visible;
+}
+
+.filtration {
+	position: absolute;
+	padding-top: 10px;
+	padding-left: 20px;
+	z-index: 1;
+	bottom: -30px;
+	left: 27.5%;
+	width: 45%;
+	height: 50%;
+	background: rgba(255, 247, 247, 0.97);
+	border: 1px solid #AFB5BD;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+}
+
+.user-name-filter, .date-from-filter, .date-to-filter {
+	display: inline-block;
+	top: 10px;
+	height: 80%;
+	position: relative;
+	margin-right: 10px;
+	font-family: Roboto, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1rem;
+}
+
+.user-name-filter {
+	width: 40%;
+}
+
+.date-from-filter, .date-to-filter {
+	width: 27%;
+}
+
+.user-name-filter.input, .date.input {
+	position: absolute;
+	top: -5px;
+	padding-left: 10px;
+	border-radius: 10px;
+	font-family: Roboto, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+}
+
+.user-name-filter.input {
+	left: 30%;
+	width: 70%;
+}
+
+.date.input {
+	left: 40%;
+	width: 60%;
+}
+
+@media (max-width: 1550px) {
+	.filtration {
+		position: absolute;
+		padding-top: 10px;
+		padding-left: 20px;
+		z-index: 1;
+		top: 105%;
+		left: calc((100% - 350px) / 2);
+		width: 350px;
+		height: 150px;
+		background: rgba(255, 247, 247, 0.97);
+		border: 1px solid #AFB5BD;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		border-radius: 10px;
+	}
+
+	.user-name-filter, .date-from-filter, .date-to-filter {
+		display: block;
+		top: 10px;
+		height: 30%;
+		position: relative;
+		margin-right: 10px;
+		font-family: Roboto, sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1rem;
+	}
+
+	.user-name-filter {
+		width: 100%;
+	}
+
+	.date-from-filter, .date-to-filter {
+		width: 100%;
+	}
+
+	.user-name-filter.input, .date.input {
+		position: absolute;
+		top: -3px;
+		padding-left: 10px;
+		border-radius: 10px;
+		font-family: Roboto, sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1rem;
+	}
+
+	.user-name-filter.input {
+		left: 25%;
+		width: 70%;
+		height: 60%;
+	}
+
+	.date.input {
+		left: 25%;
+		width: 40%;
+	}
+}
+
+@media (max-width: 1250px) {
+	.button.my-profile {
+		position: absolute;
+		right: 30px;
+		top: 27%;
+		visibility: hidden;
+	}
+
+	.button.log-out {
+		position: absolute;
+		right: 30px;
+		bottom: 20%;
+		visibility: hidden;
+	}
+
+	.button-text {
+		position: relative;
+		bottom: 5px;
+		visibility: visible;
+		font-family: Roboto, sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1.65rem;
+		color: #DEE58D;
+	}
+}
+
+@media (max-width: 720px) {
+	.context {
+		position: absolute;
+		top: 10%;
+		bottom: 10%;
+		width: 100%;
+		left: 0;
+		height: 80%;
+		overflow: scroll;
+	}
+}
+
+@media (max-height: 900px) {
+	.context {
+		position: absolute;
+		top: 90px;
+		bottom: 90px;
+		width: 700px;
+		left: calc((100% - 700px) / 2);
+		height: calc(100% - 180px);
+		overflow: scroll;
+	}
+
+	@media (max-width: 720px) {
+		.context {
+			position: absolute;
+			top: 90px;
+			bottom: 90px;
+			width: 100%;
+			left: 0;
+			height: calc(100% - 180px);
+			overflow: scroll;
+		}
+	}
+}
