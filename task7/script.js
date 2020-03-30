@@ -285,11 +285,13 @@ class PostCollection {
             console.log('this id already exist');
             return false;
         }
+
         if ((Math.abs(Object.keys(post).length - Object.keys(this._postSchema).length) === 1 && post['photoLink'] != null)
             || Math.abs(Object.keys(post).length - Object.keys(this._postSchema).length) > 1) {
             console.log('illegal arguments number');
             return false;
         }
+
         return this._validateForm(post);
     }
 
@@ -297,10 +299,12 @@ class PostCollection {
         let errors = Object.keys(form)
             .filter(key => !this._postSchema[key]?.(form[key]))
             .map(key => new Error(key + ' is invalid!'));
+
         if (errors.length > 0) {
             errors.forEach(error => console.log(error.message));
             return false;
         }
+
         return true;
     }
 
@@ -309,12 +313,14 @@ class PostCollection {
             this._posts.push(post);
             return true;
         }
+
         return false;
     }
 
     removePost(id) {
         let startLength = this._posts.length;
         this._posts = this._posts.filter(post => post.id !== id);
+
         return startLength !== this._posts.length;
     }
 
@@ -325,22 +331,25 @@ class PostCollection {
     getPage(skip = 0, top = 10, filterConfig) {
         if (filterConfig != null) {
             return this._posts.filter(p => (filterConfig['author'] == null || p.author === filterConfig['author']) &&
-                (filterConfig['fromDate'] == null || p.createdAt >= filterConfig['fromDate']) &&
+                (filterConfig['fromDate'] == null || p.createdAt > filterConfig['fromDate']) &&
                 (filterConfig['toDate'] == null || p.createdAt <= filterConfig['toDate']) &&
                 (filterConfig['tags'] == null || filterConfig['tags'].filter(tag => p.hashTags.includes(tag)).length === filterConfig['tags'].length))
                 .slice(skip, skip + top).sort(a => a.createdAt.getDate());
         }
+
         return this._posts.slice(skip, skip + top).sort(a => a.createdAt.getDate());
     }
 
     editPost(id, form) {
         let postToEdit = this._posts.find(post => post.id === id);
+
         if (form != null && form.id == null && form.author == null && this._validateForm(form)) {
             Object.keys(form).forEach(key => {
                 postToEdit[key] = form[key];
             });
             return true;
         }
+        
         return false;
     }
 
