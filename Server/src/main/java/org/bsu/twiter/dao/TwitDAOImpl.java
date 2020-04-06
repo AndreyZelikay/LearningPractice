@@ -48,9 +48,11 @@ public class TwitDAOImpl implements TwitDAO {
     @Override
     public Optional<Twit> getTwitById(Long id) {
         Twit result = null;
-        try {
-            result = twitList.get(Math.toIntExact(id) - 1);
-        } catch (IndexOutOfBoundsException ignored) {
+        for(Twit twit: twitList) {
+            if(twit.getId().equals(id)) {
+                result = twit;
+                break;
+            }
         }
         return Optional.ofNullable(result);
     }
@@ -66,8 +68,8 @@ public class TwitDAOImpl implements TwitDAO {
 
     @Override
     public void saveTwit(Twit twit) {
+        twit.setId(twitList.get(twitList.size() - 1).getId() + 1);
         twitList.add(twit);
-        twit.setId((long) (twitList.size()));
         commitChanges();
     }
 

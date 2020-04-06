@@ -11,6 +11,7 @@ import org.bsu.twiter.validators.TwitCreateFormValidator;
 import org.bsu.twiter.validators.TwitUpdateFormValidator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -50,6 +51,8 @@ public class TwitService {
     }
 
     public List<Twit> getTwits(TwitsFilterForm form) {
+        form.setSkip(Objects.requireNonNullElse(form.getSkip(), 0));
+        form.setTop(Objects.requireNonNullElse(form.getTop(), 10));
         return twitDAO.getTwits(form);
     }
 
