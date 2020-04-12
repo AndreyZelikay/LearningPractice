@@ -27,15 +27,23 @@ public class TwitServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
-        Optional<Twit> twitOptional = twitService.getTwit(id);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
+        Long id = null;
+        try {
+             id = Long.parseLong(req.getParameter("id"));
+        } catch (NumberFormatException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
 
-        if (twitOptional.isPresent()) {
-            resp.getWriter().write(objectMapper.writeValueAsString(twitOptional.get()));
-        } else {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        if(id != null) {
+            Optional<Twit> twitOptional = twitService.getTwit(id);
+
+            if (twitOptional.isPresent()) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
+                resp.getWriter().write(objectMapper.writeValueAsString(twitOptional.get()));
+            } else {
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
         }
     }
 

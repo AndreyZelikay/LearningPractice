@@ -19,6 +19,8 @@ public class GetObjectFromForm {
         }
     }
 
+    private GetObjectFromForm() {}
+
     public static <T> T getObject(Object form, Class<T> objectClass) {
         try {
             T result = objectClass.getConstructor().newInstance();

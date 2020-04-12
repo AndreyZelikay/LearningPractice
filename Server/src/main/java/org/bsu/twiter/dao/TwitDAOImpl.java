@@ -58,7 +58,7 @@ public class TwitDAOImpl implements TwitDAO {
                 (form.getFromDate() == null || twit.getCreatedAt().after(form.getFromDate()))
                 && (form.getUntilDate() == null || twit.getCreatedAt().before(form.getUntilDate()))
                 && (form.getHashTags() == null || form.getHashTags().stream().filter(tag -> twit.getHashTags().contains(tag)).count() == form.getHashTags().size()))
-                .skip(form.getSkip()).limit(form.getSkip() + form.getTop())
+                .skip(form.getSkip()).limit(form.getTop())
                 .sorted(Comparator.comparing(Twit::getCreatedAt)).collect(Collectors.toList());
     }
 
@@ -89,7 +89,9 @@ public class TwitDAOImpl implements TwitDAO {
     @Override
     public boolean deleteTwitById(Long id) {
         try {
-            twitList.remove(Math.toIntExact(id));
+            Optional<Twit> removable = twitList.stream().filter(twit -> twit.getId().equals(id)).findAny();
+            removable.ifPresent(twitList::remove);
+
             return true;
         } catch (IndexOutOfBoundsException e) {
             return false;
