@@ -245,7 +245,7 @@ class PostView {
         postTemplate.querySelector('[data-target = "user-icon"]').setAttribute('src', data.photoLink);
         postTemplate.querySelector('[data-target = "description"]').textContent = data.description;
         postTemplate.querySelector('[data-target = "photoLink"]').setAttribute('src', data.photoLink);
-        postTemplate.querySelector('[data-target = "createdAt"]').textContent = data.createdAt.toLocaleString();
+        postTemplate.querySelector('[data-target = "createdAt"]').textContent = data.createdAt.toLocaleDateString('en-US');
         postTemplate.querySelector('[data-target = "author"]').textContent = data.author;
         postTemplate.querySelector('[data-target = "hashTags"]').textContent = String(data.hashTags.map(item => '#' + item));
         postTemplate.querySelector('[data-target = "likes"]').textContent = String(data.likes.length);
@@ -291,20 +291,74 @@ class HeaderView {
     displayCurrentUser(userName) {
         this._header.querySelector('[class = "my-profile"]').textContent = userName;
     }
-}
 
+    fillForm(author, dateFrom, dateUntil) {
+        document.getElementById('userName').setAttribute('placeholder', author);
+        document.getElementById('dateFrom').setAttribute('placeholder', dateFrom.toLocaleDateString('en-US'));
+        document.getElementById('dateUntil').setAttribute('placeholder', dateUntil.toLocaleDateString('en-US'));
+    }
+
+    _fillPopUpMenu(menu, data) {
+        data.forEach(element => {
+            let option = document.importNode(document.getElementById('option'), true);
+            option.textContent = element;
+            option.setAttribute('class','select-option')
+            menu.appendChild(option);
+        });
+    }
+
+    displayTagSelect(tags) {
+        let menu = document.getElementById('tagSelect');
+
+        this.clearSelector(menu);
+
+        this._fillPopUpMenu(menu, tags);
+    }
+
+    displayUsersSelect(users) {
+        let menu = document.getElementById('userSelect');
+
+        this._fillPopUpMenu(menu, users);
+    }
+
+    clearSelector(selector) {
+        let last = selector.lastElementChild;
+        while (last && last !== selector.firstElementChild) {
+            last.remove();
+            last = selector.lastElementChild;
+        }
+    }
+}
 
 let model;
 let view;
 
 window.onload = () => {
-    new HeaderView().displayCurrentUser("Andrey")
+    let headerView = new HeaderView();
+    document.addEventListener("click", function () {
+        headerView.clearSelector(document.getElementById('tagSelect'));
+    })
+    headerView.displayCurrentUser("Andrey");
+    headerView.fillForm('Andrey', new Date(), new Date());
     view = new PostView();
     model = new Model(posts);
     view.displayPosts(posts);
 }
 
-//Controller
+class SelectController {
+    static _tagSelect = document.getElementById('tagSelect');
+    static _view = new HeaderView();
+
+    static onTagsInput(value) {
+        let tags = [];
+        posts.forEach(post => post.hashTags.forEach(tag => tags.push(tag)));
+
+        const uniqueTags = [...new Set(tags)];
+
+        this._view.displayTagSelect(uniqueTags.filter(tag => tag.includes(value)));
+    }
+}
+
 function addPost(post) {
     if (model.addPost(post)) {
         view.displayPost(post);

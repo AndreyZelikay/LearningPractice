@@ -9,7 +9,11 @@
 <body>
 <header id="header">
     <img class="logo" src="Logo.png">
-    <input class="input-field" placeholder="Find your topic">
+    <input class="input-field" placeholder="Find your topic" oninput="SelectController.onTagsInput(this.value)">
+    <div class="tags-select" id="tagSelect">
+        <template id="option">
+        </template>
+    </div>
     <p class="my-profile">Andrei</p>
     <button class="button log-out"><p class="button-text">Log out</p></button>
     <button class="button menu"><img src="menu.png" class="menu icon"></button>
