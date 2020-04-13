@@ -4,7 +4,38 @@
 	box-shadow: 0 0 7px #666;
 	width: 15%;
 	top: 0;
+	left: 5px;
+}
+
+.twit-buttons {
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+	height: 30px;
+	width: 150px;
+}
+
+.button-delete, .button-refactor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 50%;
+	height: 100%;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	border: none;
+	outline: none;
+}
+
+.button-delete {
 	left: 0;
+	border-radius: 20px 0 0 20px;
+	background: #D95050;
+}
+
+.button-refactor {
+	right: 0;
+	border-radius: 0 20px 20px 0;
+	background: #51A334;
 }
 
 .content {
@@ -35,9 +66,9 @@
 .text {
 	position: relative;
 	display: inline-block;
-	margin-top: 45px;
+	margin-top: 50px;
 	margin-left: 15px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	width: 75%;
 	font-family: Oxygen, sans-serif;
 	font-style: normal;
@@ -78,6 +109,7 @@
 
 .feedback {
 	position: absolute;
+	margin-top: 20px;
 	bottom: 10px;
 	left: 10px;
 	width: 170px;
@@ -140,7 +172,7 @@ footer {
 	min-height: 0;
 }
 
-.context {
+.twits {
 	position: absolute;
 	top: 10%;
 	bottom: 10%;
@@ -204,34 +236,37 @@ footer p {
 	border-radius: 50px;
 }
 
-.button.my-profile, .button.log-out {
+.my-profile, .button.log-out {
 	position: absolute;
-	visibility: hidden;
 }
 
-.button.my-profile {
+.my-profile {
 	right: 30px;
 }
 
-.button.log-out {
-	right: 150px;
+.my-profile, .button-text {
+	font-family: Roboto, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.65rem;
+	color: #DEE58D;
 }
 
 .button-text {
 	position: relative;
 	bottom: 5px;
 	visibility: visible;
-	font-family: Roboto, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 2rem;
-	color: #DEE58D;
 }
 
-.twit.photo {
+.button.log-out {
+	visibility: hidden;
+	right: 150px;
+}
+
+.twit-photo {
 	position: relative;
 	display: inline-block;
-	margin: 45px 0 40px 15px;
+	margin: 20px 0 40px 15px;
 	width: 75%;
 }
 
@@ -365,11 +400,10 @@ footer p {
 }
 
 @media (max-width: 1250px) {
-	.button.my-profile {
+	.my-profile {
 		position: absolute;
 		right: 30px;
 		top: 27%;
-		visibility: hidden;
 	}
 
 	.button.log-out {
@@ -379,20 +413,23 @@ footer p {
 		visibility: hidden;
 	}
 
-	.button-text {
-		position: relative;
-		bottom: 5px;
-		visibility: visible;
+	.my-profile, .button-text {
 		font-family: Roboto, sans-serif;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 1.65rem;
 		color: #DEE58D;
 	}
+
+	.button-text {
+		position: relative;
+		bottom: 5px;
+		visibility: visible;
+	}
 }
 
 @media (max-width: 720px) {
-	.context {
+	.twits {
 		position: absolute;
 		top: 10%;
 		bottom: 10%;
@@ -404,7 +441,7 @@ footer p {
 }
 
 @media (max-height: 900px) {
-	.context {
+	.twits {
 		position: absolute;
 		top: 90px;
 		bottom: 90px;
@@ -415,7 +452,7 @@ footer p {
 	}
 
 	@media (max-width: 720px) {
-		.context {
+		.twits {
 			position: absolute;
 			top: 90px;
 			bottom: 90px;
