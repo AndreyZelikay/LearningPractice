@@ -286,10 +286,18 @@ class PostView {
 
 class HeaderView {
     _header = document.getElementById("header");
-    _filtration = document.getElementById("filtration");
 
     displayCurrentUser(userName) {
         this._header.querySelector('[class = "my-profile"]').textContent = userName;
+    }
+
+    static displayFiltration() {
+        const filtration = document.getElementById("filtration");
+        if(filtration.style.display !== 'none') {
+            filtration.setAttribute('style', 'display: none');
+        } else {
+            filtration.setAttribute('style', 'display: inline-block');
+        }
     }
 
     fillForm(author, dateFrom, dateUntil) {
