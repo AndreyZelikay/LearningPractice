@@ -16,7 +16,7 @@ let posts = [
         id: '2',
         description: 'test2',
         createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
+        author: 'Andrey',
         photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
         hashTags: [
             'hash', 'tag'
@@ -42,7 +42,7 @@ let posts = [
         id: '4',
         description: 'test4',
         createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
+        author: 'Andrey',
         photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
         hashTags: [
             'hash', 'tag'
@@ -81,7 +81,7 @@ let posts = [
         id: '7',
         description: 'test7',
         createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
+        author: 'Andrey',
         photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
         hashTags: [
             'hash', 'tag'
@@ -128,140 +128,10 @@ let posts = [
         likes: [
             'Другой пользователь'
         ]
-    },
-    {
-        id: '11',
-        description: 'test11',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Mr. Snow',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '12',
-        description: 'test12',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Mr. Snow',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '13',
-        description: 'test13',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Mr. Snow',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '14',
-        description: 'test14',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '15',
-        description: 'Mr. Snow',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Mr. Snow',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '16',
-        description: 'Mr. Snow',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Mr. Snow',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '17',
-        description: 'test17',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '18',
-        description: 'test18',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '19',
-        description: 'test19',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '20',
-        description: 'test20',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'hash', 'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-];
+    }
+]
 
-class PostCollection {
+class Model {
 
     _posts;
 
@@ -281,7 +151,7 @@ class PostCollection {
     };
 
     validatePost(post) {
-        if(this._posts.find(p => post.id === p.id) != null) {
+        if (this._posts.find(p => post.id === p.id) != null) {
             console.log('this id already exist');
             return false;
         }
@@ -360,74 +230,163 @@ class PostCollection {
     clear() {
         this._posts = [];
     }
-
 }
 
-//Tests
-let postCollection = new PostCollection(posts);
-console.log(postCollection.addAll([{
-    id: '18',
-    description: 'test18',
-    createdAt: new Date('2020-03-17T23:00:00'),
-    author: 'Какой-то пользователь',
-    photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-    hashTags: [
-        'tag'
-    ],
-    likes: [
-        'Другой пользователь'
-    ]
-},
-    {
-        id: '19',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: '',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '21',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'hash', 'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '22',
-        description: 'test22',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'hash', 'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    },
-    {
-        id: '23',
-        description: 'test22',
-        createdAt: new Date('2020-03-17T23:00:00'),
-        author: 'Какой-то пользователь',
-        photoLink: 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg',
-        hashTags: [
-            'hash', 'tag'
-        ],
-        likes: [
-            'Другой пользователь'
-        ]
-    }]));
-console.log(postCollection.getPage(20,10));
-postCollection.clear();
-console.log(postCollection.getPage());
+class PostView {
+    _currentUser = 'Andrey';
+    _postTemplate = document.getElementById('twit-template');
+    _postContainer = document.getElementById('container');
+
+    _fillPostData(postTemplate, data) {
+        if(this._currentUser !== data.author) {
+            postTemplate.querySelector('[class = "twit-buttons"]').setAttribute('style', 'display: none')
+        }
+        postTemplate.firstElementChild.setAttribute('id', data.id);
+        postTemplate.querySelector('[data-target = "user-icon"]').setAttribute('src', data.photoLink);
+        postTemplate.querySelector('[data-target = "description"]').textContent = data.description;
+        postTemplate.querySelector('[data-target = "photoLink"]').setAttribute('src', data.photoLink);
+        postTemplate.querySelector('[data-target = "createdAt"]').textContent = data.createdAt.toLocaleDateString('en-US');
+        postTemplate.querySelector('[data-target = "author"]').textContent = data.author;
+        postTemplate.querySelector('[data-target = "hashTags"]').textContent = String(data.hashTags.map(item => '#' + item));
+        postTemplate.querySelector('[data-target = "likes"]').textContent = String(data.likes.length);
+    }
+
+    displayPost(post) {
+        let postNode = document.importNode(this._postTemplate.content, true);
+
+        this._fillPostData(postNode, post);
+
+        this._postContainer.insertBefore(postNode, this._postContainer.lastElementChild);
+    }
+
+    refactorPost(id, post) {
+        let postNode = document.importNode(this._postTemplate.content, true);
+
+        this._fillPostData(postNode, post);
+
+        document.getElementById(id).replaceWith(postNode);
+    }
+
+    removePost(id) {
+        document.getElementById(id)?.remove();
+    }
+
+    clearList() {
+        let first = this._postContainer.firstElementChild;
+        while (first && first !== this._postContainer.lastElementChild) {
+            first.remove();
+            first = this._postContainer.firstElementChild;
+        }
+    }
+
+    displayPosts(posts) {
+        posts.forEach(post => this.displayPost(post));
+    }
+}
+
+class HeaderView {
+    _header = document.getElementById("header");
+
+    displayCurrentUser(userName) {
+        this._header.querySelector('[class = "my-profile"]').textContent = userName;
+    }
+
+    static displayFiltration() {
+        const filtration = document.getElementById("filtration");
+        if(filtration.style.display !== 'none') {
+            filtration.setAttribute('style', 'display: none');
+        } else {
+            filtration.setAttribute('style', 'display: inline-block');
+        }
+    }
+
+    fillForm(author, dateFrom, dateUntil) {
+        document.getElementById('userName').setAttribute('placeholder', author);
+        document.getElementById('dateFrom').setAttribute('placeholder', dateFrom.toLocaleDateString('en-US'));
+        document.getElementById('dateUntil').setAttribute('placeholder', dateUntil.toLocaleDateString('en-US'));
+    }
+
+    _fillPopUpMenu(menu, data) {
+        data.forEach(element => {
+            let option = document.importNode(document.getElementById('option'), true);
+            option.textContent = element;
+            option.setAttribute('class','select-option')
+            menu.appendChild(option);
+        });
+    }
+
+    displayTagSelect(tags) {
+        let menu = document.getElementById('tagSelect');
+
+        this.clearSelector(menu);
+
+        this._fillPopUpMenu(menu, tags);
+    }
+
+    displayUsersSelect(users) {
+        let menu = document.getElementById('userSelect');
+
+        this._fillPopUpMenu(menu, users);
+    }
+
+    clearSelector(selector) {
+        let last = selector.lastElementChild;
+        while (last && last !== selector.firstElementChild) {
+            last.remove();
+            last = selector.lastElementChild;
+        }
+    }
+}
+
+let model;
+let view;
+
+window.onload = () => {
+    let headerView = new HeaderView();
+    document.addEventListener("click", function () {
+        headerView.clearSelector(document.getElementById('tagSelect'));
+    })
+    headerView.displayCurrentUser("Andrey");
+    headerView.fillForm('Andrey', new Date(), new Date());
+    view = new PostView();
+    model = new Model(posts);
+    view.displayPosts(posts);
+}
+
+class SelectController {
+    static _tagSelect = document.getElementById('tagSelect');
+    static _view = new HeaderView();
+
+    static onTagsInput(value) {
+        let tags = [];
+        posts.forEach(post => post.hashTags.forEach(tag => tags.push(tag)));
+
+        const uniqueTags = [...new Set(tags)];
+
+        this._view.displayTagSelect(uniqueTags.filter(tag => tag.includes(value)));
+    }
+}
+
+function addPost(post) {
+    if (model.addPost(post)) {
+        view.displayPost(post);
+    }
+}
+
+function editPost(id, post) {
+    if (model.editPost(id, post)) {
+        view.refactorPost(id, model.getPost(id));
+    }
+}
+
+function removePost(id) {
+    if (model.removePost(id)) {
+        view.removePost(id);
+    }
+}
+
+function getPosts(skip, top, filterConfig) {
+    let posts = model.getPage(skip, top, filterConfig);
+    view.clearList();
+    view.displayPosts(posts);
+}
