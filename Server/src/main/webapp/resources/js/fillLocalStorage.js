@@ -131,4 +131,6 @@ let posts = [
     }
 ];
 
-posts.forEach(post => localStorage.setItem(post.id, JSON.stringify(post)));
+if(localStorage.length === 0) {
+    posts.forEach(post => localStorage.setItem(post.id, JSON.stringify(post)));
+}

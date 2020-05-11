@@ -1,56 +1,66 @@
 class Controller {
+    _model;
+    _view;
+    _pagination = 10;
+    _postsOnScreen = 0;
+    _filters = {};
 
-    static pagination = 10;
-    static postsOnScreen = 0;
-    static filters = {};
+    constructor(model, view) {
+        this._model = model;
+        this._view = view;
+    }
 
-    static containerClickEvent(event) {
+    setPostsOnScreen(postsOnScreen) {
+        this._postsOnScreen = postsOnScreen;
+    }
+
+    containerClickEvent(event) {
         switch (event.target.className) {
             case 'button-refactor':
-                Controller.refactorPostClick(event);
+                this.refactorPostClick(event);
                 break;
             case 'button-delete':
-                Controller.deletePostClick(event);
+                this.deletePostClick(event);
                 break;
             case "icon":
-                Controller.likePostClick(event);
+                this.likePostClick(event);
                 break;
             case 'submit-button':
                 if (event.target.parentElement.id !== 'twitAdd') {
-                    Controller.submitRefactorClick(event);
+                    this.submitRefactorClick(event);
                 } else {
-                    Controller.addPostClick(event);
+                    this.addPostClick(event);
                 }
 
                 break;
             case 'see-more':
-                Controller.seeMoreClick(event);
+                this.seeMoreClick(event);
                 break;
         }
     }
 
-    static addPostClick(event) {
+    addPostClick(event) {
         event.preventDefault();
 
         const post = {};
         post.description = event.target.parentElement.elements.description.value;
         post.hashTags = event.target.parentElement.elements.hashTags.value;
 
-        if (model.addPost(post)) {
-            if (this.postsOnScreen % 10 !== 0) {
-                view.displayPost(post);
-                this.postsOnScreen++;
+        if (this._model.addPost(post)) {
+            if (this._postsOnScreen % 10 !== 0) {
+                this._view.displayPost(post);
+                this._postsOnScreen++;
             }
             event.target.parentElement.reset();
         }
     }
 
-    static refactorPostClick(event) {
-        const post = model.getPost(Number.parseInt(event.target.parentElement.parentElement.parentElement.id));
-        view.displayRefactoring(post);
+    refactorPostClick(event) {
+        const post = this._model.getPost(Number.parseInt(event.target.parentElement.parentElement.parentElement.id));
+        this._view.displayRefactoring(post);
     }
 
-    static submitRefactorClick(event) {
+    submitRefactorClick(event) {
         event.preventDefault();
         const refactorElement = event.target.parentElement;
         const id = Number.parseInt(event.target.parentElement.id);
@@ -59,47 +69,47 @@ class Controller {
         postForm.description = event.target.parentElement.elements.description.value;
         postForm.hashTags = event.target.parentElement.elements.hashTags.value;
 
-        const currentPost = model.getPost(id);
+        const currentPost = this._model.getPost(id);
 
-        if (model.editPost(id, postForm)) {
-            const refactoredPost = model.getPost(id);
-            view.replaceRefactorWithPost(refactorElement, refactoredPost);
+        if (this._model.editPost(id, postForm)) {
+            const refactoredPost = this._model.getPost(id);
+            this._view.replaceRefactorWithPost(refactorElement, refactoredPost);
             return;
         }
 
-        view.replaceRefactorWithPost(refactorElement, currentPost);
+        this._view.replaceRefactorWithPost(refactorElement, currentPost);
     }
 
-    static deletePostClick(event) {
+    deletePostClick(event) {
         const id = Number.parseInt(event.target.parentElement.parentElement.parentElement.id);
-        if (model.removePost(id)) {
-            view.removePost(id);
+        if (this._model.removePost(id)) {
+            this._view.removePost(id);
         }
     }
 
-    static likePostClick(event) {
+    likePostClick(event) {
         if (!localStorage.getItem('user')) {
             return;
         }
         const id = Number.parseInt(event.target.parentElement.parentElement.parentElement.parentElement.id);
-        const post = model.getPost(id);
-        model.changeLikes(post);
-        view.refreshPostLikes(post);
+        const post = this._model.getPost(id);
+        this._model.changeLikes(post);
+        this._view.refreshPostLikes(post);
     }
 
-    static seeMoreClick(event) {
-        const posts = model.getPage(Controller.postsOnScreen, Controller.pagination, Controller.filters);
-        Controller.postsOnScreen += posts.length;
-        view.displayPosts(posts);
+    seeMoreClick(event) {
+        const posts = this._model.getPage(this._postsOnScreen, this._pagination, this._filters);
+        this._postsOnScreen += posts.length;
+        this._view.displayPosts(posts);
     }
 
-    static displayFiltrationClick(event) {
+    displayFiltrationClick(event) {
         event.preventDefault();
-        view.displayFiltration();
+        this._view.displayFiltration();
     }
 
-    static onFiltersChange(event) {
-        view.clearList();
+    onFiltersChange(event) {
+        this._view.clearList();
         let filter = event.target;
         while (filter.elements == null) {
             filter = filter.parentElement;
@@ -112,66 +122,63 @@ class Controller {
         filters.dateTo = new Date(formElements.dateTo.value);
         filters.hashTags = formElements.hashTags.value.split(' ').filter(tag => tag !== '');
 
-        Controller.filters = filters;
+        this._filters = filters;
 
-        const posts = model.getPage(0, Controller.pagination, filters);
-        Controller.postsOnScreen = posts.length;
-        view.displayPosts(posts);
+        const posts = this._model.getPage(0, this._pagination, filters);
+        this._postsOnScreen = posts.length;
+        this._view.displayPosts(posts);
     }
 
-    static loginEvent(event) {
+    loginEvent(event) {
         if (localStorage.getItem('user')) {
-            Controller.logOutClick();
+            this.logOutClick();
         } else {
-            Controller.loginClick();
+            this.loginClick();
         }
     }
 
-    static loginClick(event) {
+    loginClick(event) {
         const user = prompt('Input your login');
 
         if (user.length !== 0) {
             localStorage.setItem('user', user);
-            view.displayCurrentUser(localStorage.getItem('user'));
-            view.displayPostCreation();
-            Controller.refreshPostList();
+            this._view.displayCurrentUser(localStorage.getItem('user'));
+            this._view.displayPostCreation();
+            this.refreshPostList();
         } else {
             alert('incorrect login');
         }
     }
 
-    static refreshPostList() {
-        view.clearList();
-        const posts = model.getPage(0, 10);
-        Controller.filters = null;
-        view.clearFiltrationForm();
-        Controller.postsOnScreen = posts.length;
-        console.log(posts);
-        view.displayPosts(posts);
+    refreshPostList() {
+        this._view.clearList();
+        const posts = this._model.getPage(0, 10);
+        this._filters = null;
+        this._view.clearFiltrationForm();
+        this._postsOnScreen = posts.length;
+        this._view.displayPosts(posts);
     }
 
-    static logOutClick(event) {
-        view.displayLogIn();
-        view.hidePostCreation();
+    logOutClick(event) {
+        this._view.displayLogIn();
+        this._view.hidePostCreation();
         localStorage.removeItem('user');
-        Controller.refreshPostList();
+        this.refreshPostList();
     }
 }
 
-let model;
-let view;
-
 window.onload = () => {
-    model = new Model();
-    view = new View();
+    const view = new View();
+    const model = new Model();
+    const controller = new Controller(model, view);
 
     localStorage.setItem('userPhoto', 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg');
 
-    document.getElementById('container').addEventListener('click', Controller.containerClickEvent);
-    document.getElementById('menu-button').addEventListener('click', Controller.displayFiltrationClick);
-    document.getElementById('filtration').addEventListener('change', Controller.onFiltersChange);
-    document.getElementById('filtration').hashTags.addEventListener('input', Controller.onFiltersChange);
-    document.getElementById('login-button').addEventListener('click', Controller.loginEvent);
+    document.getElementById('container').addEventListener('click', (event) => controller.containerClickEvent(event));
+    document.getElementById('menu-button').addEventListener('click', (event) => controller.displayFiltrationClick(event));
+    document.getElementById('filtration').addEventListener('change', (event) => controller.onFiltersChange(event));
+    document.getElementById('filtration').hashTags.addEventListener('input', (event) => controller.onFiltersChange(event));
+    document.getElementById('login-button').addEventListener('click', (event) => controller.loginEvent(event));
 
     if (!localStorage.getItem('user')) {
         view.displayLogIn();
@@ -181,6 +188,6 @@ window.onload = () => {
     }
 
     const posts = model.getPage(0, 10);
-    Controller.postsOnScreen = posts.length;
+    controller.setPostsOnScreen(posts.length);
     view.displayPosts(posts);
 };
