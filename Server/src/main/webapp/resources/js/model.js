@@ -25,7 +25,7 @@ class Model {
         createdAt: val => Object.prototype.toString.call(val) === '[object Date]',
         author: val => typeof val === 'string' && val.length > 0,
         photoLink: val => typeof val === 'string',
-        hashTags: val => typeof val === 'string' && val.length > 0 && val.includes('#'),
+        hashTags: val => typeof val === 'string' && (val.length > 0 && val.includes('#') || val.length === 0),
         likes: val => Array.isArray(val)
     };
 
@@ -58,11 +58,7 @@ class Model {
     }
 
     addPost(post) {
-        if (this._posts.length === 0) {
-            post.id = 1;
-        } else {
-            post.id = this._posts[this._posts.length - 1].id + 1;
-        }
+        post.id = this._posts.length === 0 ? 1 : this._posts[this._posts.length - 1].id + 1;
 
         post.likes = [];
         post.createdAt = new Date();
@@ -113,7 +109,8 @@ class Model {
             return this._posts.filter(p => (filterConfig.author == null || filterConfig.author.length === 0 || p.author === filterConfig.author) &&
                 (isNaN(filterConfig.dateFrom) || p.createdAt > filterConfig.dateFrom) &&
                 (isNaN(filterConfig.dateTo) || p.createdAt <= filterConfig.dateTo) &&
-                (filterConfig.hashTags == null || filterConfig.hashTags.filter(tag => p.hashTags.includes(tag)).length === filterConfig.hashTags.length))
+                (filterConfig.hashTags == null || filterConfig.hashTags.filter(tag => p.hashTags.filter(pTag => pTag.includes(tag)).length !== 0)
+                    .length === filterConfig.hashTags.length))
                 .slice(skip, skip + top).sort((a, b) => a.createdAt - b.createdAt);
         }
         return this._posts.slice(skip, skip + top).sort(a => a.createdAt.getDate());

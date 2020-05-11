@@ -8,32 +8,66 @@
     <script src="resources/js/view.js"></script>
     <script src="resources/js/controller.js"></script>
     <script src="resources/js/fillLocalStorage.js"></script>
-
 </head>
 <body>
 <header id="header">
     <img class="logo" src="Logo.png">
     <p class="my-profile"></p>
-    <button id="login-button" class="button log-out"><p class="button-text">Log out</p></button>
+    <button id="login-button" class="button log-out">
+        <p class="button-text">Log out</p>
+    </button>
 
-    <form id="filtration" name="filtration">
-        <input class="input-field" name="hashTags" placeholder="Input tags">
-        <button class="button menu" id="menu-button"><img src="menu.png" class="menu icon"></button>
-        <div class="tags-select" id="tagSelect">
-            <template id="option">
+    <form id="filtration"
+          name="filtration">
+        <input class="input-field"
+               name="hashTags"
+               placeholder="Input tags">
 
-            </template>
-        </div>
-        <div class="filtration" id="filters">
-            <label class="user-name-filter" for="userName">User name<input id="userName" name="author" type="text"
-                                                                           placeholder="name"
-                                                                           class="user-name-filter input"></label>
-            <label class="date-from-filter" for="dateFrom">Date from:<input id="dateFrom" name="dateFrom" type="date"
-                                                                            placeholder="02 03 2020"
-                                                                            class="date input"></label>
-            <label class="date-to-filter" for="dateUntil">Date until:<input id="dateUntil" name="dateTo" type="date"
-                                                                            placeholder="02 03 2020"
-                                                                            class="date input"></label>
+        <button class="button menu"
+                id="menu-button">
+            <img src="menu.png" class="menu icon">
+        </button>
+
+        <div class="filtration"
+             id="filters">
+            <div class="row">
+                <label class="user-name-filter"
+                       for="userName">
+                    User name
+                </label>
+
+                <input id="userName"
+                       name="author"
+                       type="text"
+                       placeholder="name"
+                       class="user-name-filter input">
+            </div>
+
+            <div class="row">
+                <label class="date-from-filter"
+                       for="dateFrom">
+                    Date from:
+                </label>
+
+                <input id="dateFrom"
+                       name="dateFrom"
+                       type="date"
+                       placeholder="02 03 2020"
+                       class="date input">
+            </div>
+
+            <div class="row">
+                <label class="date-to-filter"
+                       for="dateUntil">
+                    Date until:
+                </label>
+
+                <input id="dateUntil"
+                       name="dateTo"
+                       type="date"
+                       placeholder="02 03 2020"
+                       class="date input">
+            </div>
         </div>
     </form>
 

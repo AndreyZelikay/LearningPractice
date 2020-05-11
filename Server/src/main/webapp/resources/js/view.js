@@ -9,12 +9,15 @@ class View {
         if (this._currentUser !== data.author) {
             postTemplate.querySelector('[class = "twit-buttons"]').setAttribute('style', 'display: none')
         }
+
         postTemplate.firstElementChild.setAttribute('id', data.id);
+
         if (data?.photoLink != null) {
             postTemplate.querySelector('[data-target = "photoLink"]').setAttribute('src', data.photoLink);
         } else {
             postTemplate.querySelector('[data-target = "photoLink"]').setAttribute('style', 'display: none');
         }
+
         postTemplate.querySelector('[data-target = "user-icon"]').setAttribute('src', localStorage.getItem('userPhoto'));
         postTemplate.querySelector('[data-target = "description"]').textContent = data.description;
         postTemplate.querySelector('[data-target = "createdAt"]').textContent = data.createdAt.toLocaleDateString('en-US');
@@ -55,6 +58,7 @@ class View {
 
     clearList() {
         let first = this._postContainer.children[1];
+
         while (first && first !== this._postContainer.lastElementChild) {
             first.remove();
             first = this._postContainer.children[1];
@@ -81,6 +85,7 @@ class View {
 
     displayFiltration() {
         const filtration = document.getElementById("filters");
+
         if (filtration.style.display !== 'none') {
             filtration.setAttribute('style', 'display: none');
         } else {

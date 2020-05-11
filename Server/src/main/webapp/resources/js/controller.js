@@ -1,6 +1,3 @@
-let model;
-let view;
-
 class Controller {
 
     static pagination = 10;
@@ -8,19 +5,27 @@ class Controller {
     static filters = {};
 
     static containerClickEvent(event) {
-        if (event.target.className === 'button-refactor') {
-            Controller.refactorPostClick(event);
-        } else if (event.target.className === 'button-delete') {
-            Controller.deletePostClick(event);
-        } else if (event.target.className === 'icon') {
-            Controller.likePostClick(event);
-        } else if (event.target.className === 'submit-button'
-            && event.target.parentElement.id !== 'twitAdd') {
-            Controller.submitRefactorClick(event);
-        } else if (event.target.className === 'submit-button') {
-            Controller.addPostClick(event);
-        } else if(event.target.className === "see-more") {
-            Controller.seeMoreClick(event);
+        switch (event.target.className) {
+            case 'button-refactor':
+                Controller.refactorPostClick(event);
+                break;
+            case 'button-delete':
+                Controller.deletePostClick(event);
+                break;
+            case "icon":
+                Controller.likePostClick(event);
+                break;
+            case 'submit-button':
+                if (event.target.parentElement.id !== 'twitAdd') {
+                    Controller.submitRefactorClick(event);
+                } else {
+                    Controller.addPostClick(event);
+                }
+
+                break;
+            case 'see-more':
+                Controller.seeMoreClick(event);
+                break;
         }
     }
 
@@ -32,7 +37,7 @@ class Controller {
         post.hashTags = event.target.parentElement.elements.hashTags.value;
 
         if (model.addPost(post)) {
-            if(this.postsOnScreen % 10 !== 0) {
+            if (this.postsOnScreen % 10 !== 0) {
                 view.displayPost(post);
                 this.postsOnScreen++;
             }
@@ -73,7 +78,7 @@ class Controller {
     }
 
     static likePostClick(event) {
-        if(!localStorage.getItem('user')){
+        if (!localStorage.getItem('user')) {
             return;
         }
         const id = Number.parseInt(event.target.parentElement.parentElement.parentElement.parentElement.id);
@@ -96,7 +101,7 @@ class Controller {
     static onFiltersChange(event) {
         view.clearList();
         let filter = event.target;
-        while(filter.elements == null){
+        while (filter.elements == null) {
             filter = filter.parentElement;
         }
 
@@ -115,7 +120,7 @@ class Controller {
     }
 
     static loginEvent(event) {
-        if(localStorage.getItem('user')) {
+        if (localStorage.getItem('user')) {
             Controller.logOutClick();
         } else {
             Controller.loginClick();
@@ -125,7 +130,7 @@ class Controller {
     static loginClick(event) {
         const user = prompt('Input your login');
 
-        if(user.length !== 0) {
+        if (user.length !== 0) {
             localStorage.setItem('user', user);
             view.displayCurrentUser(localStorage.getItem('user'));
             view.displayPostCreation();
@@ -153,19 +158,28 @@ class Controller {
     }
 }
 
+let model;
+let view;
+
 window.onload = () => {
     model = new Model();
     view = new View();
 
-    localStorage.removeItem('user');
     localStorage.setItem('userPhoto', 'https://m2bob-forum.net/wcf/images/avatars/3e/2720-3e546be0b0701e0cb670fa2f4fcb053d4f7e1ba5.jpg');
 
     document.getElementById('container').addEventListener('click', Controller.containerClickEvent);
     document.getElementById('menu-button').addEventListener('click', Controller.displayFiltrationClick);
     document.getElementById('filtration').addEventListener('change', Controller.onFiltersChange);
+    document.getElementById('filtration').hashTags.addEventListener('input', Controller.onFiltersChange);
     document.getElementById('login-button').addEventListener('click', Controller.loginEvent);
 
-    view.displayLogIn();
+    if (!localStorage.getItem('user')) {
+        view.displayLogIn();
+    } else {
+        view.displayCurrentUser(localStorage.getItem('user'));
+        view.displayPostCreation();
+    }
+
     const posts = model.getPage(0, 10);
     Controller.postsOnScreen = posts.length;
     view.displayPosts(posts);
