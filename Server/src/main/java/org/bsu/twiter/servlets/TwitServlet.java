@@ -47,7 +47,6 @@ public class TwitServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String json = req.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
