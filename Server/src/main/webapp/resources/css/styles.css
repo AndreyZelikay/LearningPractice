@@ -7,6 +7,60 @@
 	left: 5px;
 }
 
+.tags-input, .description-input {
+	position: relative;
+	display: block;
+	width: 70%;
+	left: 5%;
+	right: 15%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	text-indent: 10px;
+	outline: none;
+}
+
+.tags-input {
+	min-height: 30px;
+	overflow: paged-x;
+}
+
+.description-input {
+	height: 90px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 10px;
+	resize: none;
+	overflow: hidden;
+}
+
+.submit-button {
+	position: absolute;
+	right: 5%;
+	bottom: 20px;
+	width: 15%;
+	height: 20px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	background: forestgreen;
+}
+
+.twit-creation {
+	position: relative;
+	display: none;
+	width: 80%;
+	left: 10%;
+	right: 10%;
+	margin-top: 20px;
+	min-height: 18%;
+	border-radius: 10px;
+	background: rgba(255, 247, 247, 0.97);
+	border: 1px solid #AFB5BD;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .twit-buttons {
 	position: absolute;
 	right: 20px;
@@ -35,7 +89,7 @@
 .button-refactor {
 	right: 0;
 	border-radius: 0 20px 20px 0;
-	background: #51A334;
+	background: forestgreen;
 }
 
 .content {
@@ -46,7 +100,7 @@
 	margin-top: 0;
 	bottom: 0;
 	width: 80%;
-	min-height: 18%;
+	min-height: 150px;
 	border-radius: 10px;
 	background: rgba(255, 247, 247, 0.97);
 	border: 1px solid #AFB5BD;
@@ -88,6 +142,7 @@
 
 .tags {
 	position: absolute;
+	text-align: right;
 	word-wrap: break-word;
 	width: 20%;
 	top: 30px;
@@ -199,21 +254,14 @@ footer p {
 	width: 100%;
 }
 
-.button.see-more {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
 .see-more {
 	position: relative;
 	display: inline-block;
 	margin-top: 5%;
 	margin-bottom: 5%;
-	height: 5%;
+	height: 30px;
 	width: 30%;
+	outline: none;
 	left: 35%;
 	background: #F7F8FB;
 	border-radius: 20px;
@@ -225,6 +273,7 @@ footer p {
 	width: 40%;
 	height: 45%;
 	left: 30%;
+	outline: none;
 	padding-left: 2%;
 	font-family: Roboto, sans-serif;
 	font-style: normal;
@@ -289,118 +338,74 @@ footer p {
 	padding-top: 10px;
 	padding-left: 20px;
 	z-index: 1;
-	bottom: -30px;
-	left: 27.5%;
-	width: 45%;
-	height: 50%;
+	top: 105%;
+	left: calc((100% - 350px) / 2);
+	width: 350px;
+	height: 150px;
 	background: rgba(255, 247, 247, 0.97);
 	border: 1px solid #AFB5BD;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 }
 
-.user-name-filter, .date-from-filter, .date-to-filter {
-	display: inline-block;
-	top: 10px;
-	height: 80%;
-	position: relative;
-	margin-right: 10px;
+.user-name-filter, .date-from-filter, .date-to-filter , .user-name-filter.input, .date.input {
 	font-family: Roboto, sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 1rem;
 }
 
-.user-name-filter {
-	width: 40%;
+.row {
+	position: relative;
+	display: block;
+	margin-top: 10px;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 20%;
 }
 
-.date-from-filter, .date-to-filter {
-	width: 27%;
+.user-name-filter, .date-from-filter, .date-to-filter {
+	position: relative;
+	display: inline;
+	top: 0;
+	left: 0;
+}
+
+.user-name-filter {
+	margin-right: 5px;
+}
+
+.date-from-filter {
+	margin-right: 8px;
+}
+
+.date-to-filter {
+	margin-right: 11px;
 }
 
 .user-name-filter.input, .date.input {
-	position: absolute;
-	top: -5px;
-	padding-left: 10px;
+	position: relative;
+	display: inline;
+	top:0;
+	right: 0;
 	border-radius: 10px;
-	font-family: Roboto, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 20px;
+	height: 90%;
+	outline: none;
+	margin-left: 5px;
 }
 
 .user-name-filter.input {
-	left: 30%;
-	width: 70%;
+	width: 65%;
+	text-indent: 10px;
 }
 
 .date.input {
-	left: 40%;
-	width: 60%;
+	width: 40%;
+	text-indent: 5px;
 }
 
-@media (max-width: 1550px) {
-	.filtration {
-		position: absolute;
-		padding-top: 10px;
-		padding-left: 20px;
-		z-index: 1;
-		top: 105%;
-		left: calc((100% - 350px) / 2);
-		width: 350px;
-		height: 150px;
-		background: rgba(255, 247, 247, 0.97);
-		border: 1px solid #AFB5BD;
-		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-		border-radius: 10px;
-	}
-
-
-	.user-name-filter, .date-from-filter, .date-to-filter {
-		display: block;
-		top: 10px;
-		height: 30%;
-		position: relative;
-		margin-right: 10px;
-		font-family: Roboto, sans-serif;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 1rem;
-	}
-
-	.user-name-filter {
-		width: 100%;
-	}
-
-	.date-from-filter, .date-to-filter {
-		width: 100%;
-	}
-
-	.user-name-filter.input, .date.input {
-		position: absolute;
-		top: -3px;
-		padding-left: 10px;
-		border-radius: 10px;
-		font-family: Roboto, sans-serif;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 1rem;
-	}
-
-	.user-name-filter.input {
-		left: 25%;
-		width: 70%;
-		height: 60%;
-	}
-
-	.date.input {
-		left: 25%;
-		width: 40%;
-	}
-}
-
-@media (max-width: 1250px) {
+@media (max-width: 1500px) {
 	.my-profile {
 		position: absolute;
 		right: 30px;
@@ -427,31 +432,6 @@ footer p {
 		bottom: 5px;
 		visibility: visible;
 	}
-}
-
-.tags-select {
-	position: absolute;
-	z-index: 2;
-	top: 110%;
-	width: 200px;
-	left: calc((100% - 200px) / 2);
-}
-
-.select-option {
-	position: relative;
-	display: block;
-	width: 100%;
-	height: 40px;
-	padding-left: 10px;
-	padding-top: 5px;
-	font-family: Roboto, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 1.5rem;
-	background: rgba(255, 247, 247, 0.97);
-	border: 1px solid #AFB5BD;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 10px;
 }
 
 @media (max-width: 720px) {

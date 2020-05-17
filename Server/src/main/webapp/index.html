@@ -4,35 +4,89 @@
     <title>Opinion</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="resources/css/styles.css">
-    <script src="resources/js/script.js"></script>
+    <script src="resources/js/model.js"></script>
+    <script src="resources/js/view.js"></script>
+    <script src="resources/js/controller.js"></script>
+    <script src="resources/js/fillLocalStorage.js"></script>
 </head>
 <body>
 <header id="header">
     <img class="logo" src="Logo.png">
-    <input class="input-field" placeholder="Find your topic" oninput="SelectController.onTagsInput(this.value)">
-    <div class="tags-select" id="tagSelect">
-        <template id="option">
-        </template>
-    </div>
-    <p class="my-profile">Andrei</p>
-    <button class="button log-out"><p class="button-text">Log out</p></button>
-    <button class="button menu" onclick="HeaderView.displayFiltration()"><img src="menu.png" class="menu icon"></button>
-    <form id="filtration">
-        <div class="filtration">
-            <label class="user-name-filter" for="userName">User name<input id="userName" type="text" placeholder="name" class="user-name-filter input"></label>
-            <label class="date-from-filter" for="dateFrom">Date from:<input id="dateFrom" type="text" placeholder="02 03 2020" class="date input"></label>
-            <label class="date-to-filter" for="dateUntil">Date until:<input id="dateUntil" type="text" placeholder="02 03 2020" class="date input"></label>
+    <p class="my-profile"></p>
+    <button id="login-button" class="button log-out">
+        <p class="button-text">Log out</p>
+    </button>
+
+    <form id="filtration"
+          name="filtration">
+        <input class="input-field"
+               name="hashTags"
+               placeholder="Input tags">
+
+        <button class="button menu"
+                id="menu-button">
+            <img src="menu.png" class="menu icon">
+        </button>
+
+        <div class="filtration"
+             id="filters">
+            <div class="row">
+                <label class="user-name-filter"
+                       for="userName">
+                    User name
+                </label>
+
+                <input id="userName"
+                       name="author"
+                       type="text"
+                       placeholder="name"
+                       class="user-name-filter input">
+            </div>
+
+            <div class="row">
+                <label class="date-from-filter"
+                       for="dateFrom">
+                    Date from:
+                </label>
+
+                <input id="dateFrom"
+                       name="dateFrom"
+                       type="date"
+                       placeholder="02 03 2020"
+                       class="date input">
+            </div>
+
+            <div class="row">
+                <label class="date-to-filter"
+                       for="dateUntil">
+                    Date until:
+                </label>
+
+                <input id="dateUntil"
+                       name="dateTo"
+                       type="date"
+                       placeholder="02 03 2020"
+                       class="date input">
+            </div>
         </div>
     </form>
+
 </header>
 
 <div class="twits" id="container">
+
+    <form class="twit-creation" id="twitAdd">
+        <input name="hashTags" type="text" class="tags-input" placeholder="input tags"/>
+        <textarea name="description" class="description-input" placeholder="input your opinion"></textarea>
+        <input name="submit" type="submit" value="Post" class="submit-button">
+    </form>
+
     <template id="twit-template">
         <div class="twit" id="">
             <img class="user-icon" data-target="user-icon" src="Logo.png">
             <div class="content">
                 <p class="date" data-target="createdAt"></p>
-                <p class = "text" data-target="description"></p>
+                <p class="text" data-target="description"></p>
                 <img class="twit-photo" data-target="photoLink">
                 <p class="name" data-target="author"></p>
                 <p class="tags" data-target="hashTags"></p>
@@ -41,15 +95,13 @@
                     <button class="button-refactor">Refactor</button>
                 </div>
                 <div class="feedback">
-                    <button class = "feedback-button"><img class = "icon" src="upward.png"></button>
+                    <button class="feedback-button"><img class="icon" src="upward.png"></button>
                     <p class="feedback-counter" data-target="likes"></p>
                 </div>
             </div>
         </div>
     </template>
-    <div class="see-more">
-        <button class="button see-more">See more</button>
-    </div>
+    <button class="see-more">See more</button>
 </div>
 
 <footer>
