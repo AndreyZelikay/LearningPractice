@@ -65,10 +65,10 @@ class View {
         }
     }
 
-    refreshPostLikes(post) {
-        document.getElementById(post.id)
-            .querySelector('[data-target = "likes"]')
-            .textContent = String(post.likes.length);
+    refreshPostLikes(postId, isIncrease) {
+        let postLikes = document.getElementById(postId).querySelector('[data-target = "likes"]');
+        const numberLikes = Number.parseInt(postLikes.textContent);
+        postLikes.textContent = (isIncrease) ? String(numberLikes + 1) : String(numberLikes - 1);
     }
 
     displayPosts(posts) {
