@@ -1,0 +1,1 @@
+select name, count(*) as numberPosts from post inner join user on post.user_id = user.user_id where datediff(created_at, '2020-03-01 00:00:00') = 0 group by name;

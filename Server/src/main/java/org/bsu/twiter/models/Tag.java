@@ -6,6 +6,12 @@ public class Tag {
     private Long id;
     private String body;
 
+    public Tag() {}
+
+    public Tag(String body) {
+        this.body = body;
+    }
+
     public Long getId() {
         return id;
     }

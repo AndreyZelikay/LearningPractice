@@ -1,12 +1,13 @@
 package org.bsu.twiter.services;
 
-import org.bsu.twiter.dao.TwitDAO;
-import org.bsu.twiter.dao.TwitDAOImpl;
-import org.bsu.twiter.forms.GetObjectFromForm;
+import org.bsu.twiter.dao.*;
 import org.bsu.twiter.forms.TwitCreateForm;
 import org.bsu.twiter.forms.TwitUpdateForm;
 import org.bsu.twiter.forms.TwitsFilterForm;
+import org.bsu.twiter.models.Like;
+import org.bsu.twiter.models.Tag;
 import org.bsu.twiter.models.Twit;
+import org.bsu.twiter.models.User;
 import org.bsu.twiter.validators.TwitCreateFormValidator;
 import org.bsu.twiter.validators.TwitUpdateFormValidator;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class TwitService {
 
@@ -29,19 +31,34 @@ public class TwitService {
         }
     }
 
-    private TwitDAO twitDAO;
+    private final TwitDAO twitDAO;
+    private final LikeDAO likeDAO;
+    private final UserDAO userDao;
 
     public TwitService() {
         twitDAO = new TwitDAOImpl();
+        likeDAO = new LikeDAOImpl();
+        userDao = new UserDAOImpl();
     }
 
     public boolean saveTwit(TwitCreateForm twitCreateForm) {
         List<String> errors = new TwitCreateFormValidator().validate(twitCreateForm);
         if(errors.isEmpty()) {
-            Twit twit = GetObjectFromForm.getObject(twitCreateForm, Twit.class);
-            twitDAO.saveTwit(twit);
+            Optional<User> userOptional = userDao.findById(twitCreateForm.getAuthorId());
 
-            return true;
+            if(!userOptional.isPresent()) {
+                logger.log(Level.WARNING, "no such user");
+                return false;
+            }
+
+            Twit twit = new Twit(
+                    twitCreateForm.getDescription(),
+                    userOptional.get(),
+                    twitCreateForm.getPhotoLink(),
+                    twitCreateForm.getHashTags().stream().map(Tag::new).collect(Collectors.toList()),
+                    twitCreateForm.getCreatedAt());
+
+            return twitDAO.save(twit);
         } else {
             String errorMessage =  "Illegal arguments in form:\n" + String.join(" ", errors);
             logger.log(Level.WARNING, errorMessage);
@@ -57,15 +74,19 @@ public class TwitService {
     }
 
     public Optional<Twit> getTwit(Long id) {
-        return twitDAO.getTwitById(id);
+        return twitDAO.findById(id);
     }
 
-    public boolean updateTwit(TwitUpdateForm twitCreateForm) {
-        List<String> errors = new TwitUpdateFormValidator().validate(twitCreateForm);
+    public boolean updateTwit(TwitUpdateForm twitUpdateForm) {
+        List<String> errors = new TwitUpdateFormValidator().validate(twitUpdateForm);
 
         if(errors.isEmpty()) {
-            Twit twit = GetObjectFromForm.getObject(twitCreateForm, Twit.class);
-            twitDAO.updateTwit(twit);
+            Twit twit = new Twit(
+                    twitUpdateForm.getId(),
+                    twitUpdateForm.getDescription(),
+                    twitUpdateForm.getPhotoLink(),
+                    twitUpdateForm.getHashTags().stream().map(Tag::new).collect(Collectors.toList()));
+            twitDAO.update(twit);
 
             return true;
         } else {
@@ -77,6 +98,16 @@ public class TwitService {
     }
 
     public boolean deleteTwit(Long id) {
-        return twitDAO.deleteTwitById(id);
+        return twitDAO.delete(id);
+    }
+
+    public boolean postLike(Like like) {
+        if(likeDAO.isLikePresent(like)) {
+            likeDAO.deleteLike(like);
+            return false;
+        } else {
+            likeDAO.saveLike(like);
+            return true;
+        }
     }
 }

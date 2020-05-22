@@ -1,7 +1,5 @@
 package org.bsu.twiter.forms;
 
-import org.bsu.twiter.models.Tag;
-
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +7,8 @@ public class TwitCreateForm {
 
     private String photoLink;
     private String description;
-    private List<Tag> hashTags;
-    private String author;
+    private List<String> hashTags;
+    private long authorId;
     private Date createdAt;
 
     public Date getCreatedAt() {
@@ -21,12 +19,12 @@ public class TwitCreateForm {
         this.createdAt = createdAt;
     }
 
-    public String getAuthor() {
-        return author;
+    public long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
     }
 
     public String getPhotoLink() {
@@ -45,11 +43,11 @@ public class TwitCreateForm {
         this.description = description;
     }
 
-    public List<Tag> getHashTags() {
+    public List<String> getHashTags() {
         return hashTags;
     }
 
-    public void setHashTags(List<Tag> hashTags) {
+    public void setHashTags(List<String> hashTags) {
         this.hashTags = hashTags;
     }
 }

@@ -7,11 +7,28 @@ import java.util.Objects;
 public class Twit {
     private Long id;
     private String description;
-    private String author;
+    private User author;
     private String photoLink;
     private List<Tag> hashTags;
     private List<Like> likes;
     private Date createdAt;
+
+    public Twit() {}
+
+    public Twit(String description, User author, String photoLink, List<Tag> hashTags, Date createdAt) {
+        this.description = description;
+        this.author = author;
+        this.photoLink = photoLink;
+        this.hashTags = hashTags;
+        this.createdAt = createdAt;
+    }
+
+    public Twit(Long id, String description, String photoLink, List<Tag> hashTags) {
+        this.id = id;
+        this.description = description;
+        this.photoLink = photoLink;
+        this.hashTags = hashTags;
+    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -37,11 +54,11 @@ public class Twit {
         this.description = description;
     }
 
-    public String getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
