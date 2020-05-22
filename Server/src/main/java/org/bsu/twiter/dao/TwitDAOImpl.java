@@ -1,5 +1,7 @@
 package org.bsu.twiter.dao;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bsu.twiter.forms.TwitsFilterForm;
 import org.bsu.twiter.models.Tag;
 import org.bsu.twiter.models.Twit;
@@ -73,7 +75,7 @@ public class TwitDAOImpl implements TwitDAO {
         }
 
         sql.append(" limit ")
-                .append(form.getTop())
+                .append(form.getSkip())
                 .append(", ")
                 .append(form.getTop() + form.getSkip());
 
@@ -112,7 +114,7 @@ public class TwitDAOImpl implements TwitDAO {
     }
 
     @Override
-    public boolean save(Twit twit) {
+    public long save(Twit twit) {
         try (Connection connection = connectionPool.getConnection()) {
             connection.setAutoCommit(false);
 
@@ -125,12 +127,12 @@ public class TwitDAOImpl implements TwitDAO {
 
             connection.commit();
 
-            return true;
+            return previousPostId + 1;
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "connection error " + e.getMessage());
         }
 
-        return false;
+        return 0;
     }
 
     @Override
@@ -141,6 +143,7 @@ public class TwitDAOImpl implements TwitDAO {
             try (PreparedStatement statement = connection.prepareStatement(SQLQueries.UPDATE_POST_DESCRIPTION)) {
                 statement.setString(1, twit.getDescription());
                 statement.setLong(2, twit.getId());
+                statement.executeUpdate();
             }
 
             try (PreparedStatement statement = connection.prepareStatement(SQLQueries.GET_TAG_IDS_BY_POST_ID,
@@ -164,7 +167,6 @@ public class TwitDAOImpl implements TwitDAO {
             saveTwitTags(twit, connection);
 
             connection.commit();
-
             return true;
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "connection error " + e.getMessage());

@@ -3,7 +3,7 @@ package org.bsu.twiter.models;
 import java.util.Objects;
 
 public class Tag {
-    private Long id;
+    private long id;
     private String body;
 
     public Tag() {}
@@ -12,11 +12,11 @@ public class Tag {
         this.body = body;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

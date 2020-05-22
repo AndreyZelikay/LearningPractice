@@ -11,6 +11,7 @@ import org.bsu.twiter.models.User;
 import org.bsu.twiter.validators.TwitCreateFormValidator;
 import org.bsu.twiter.validators.TwitUpdateFormValidator;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,14 +42,14 @@ public class TwitService {
         userDao = new UserDAOImpl();
     }
 
-    public boolean saveTwit(TwitCreateForm twitCreateForm) {
+    public Optional<Twit> saveTwit(TwitCreateForm twitCreateForm) {
         List<String> errors = new TwitCreateFormValidator().validate(twitCreateForm);
         if(errors.isEmpty()) {
             Optional<User> userOptional = userDao.findById(twitCreateForm.getAuthorId());
 
             if(!userOptional.isPresent()) {
                 logger.log(Level.WARNING, "no such user");
-                return false;
+                return Optional.empty();
             }
 
             Twit twit = new Twit(
@@ -56,14 +57,14 @@ public class TwitService {
                     userOptional.get(),
                     twitCreateForm.getPhotoLink(),
                     twitCreateForm.getHashTags().stream().map(Tag::new).collect(Collectors.toList()),
-                    twitCreateForm.getCreatedAt());
+                    new Date());
 
-            return twitDAO.save(twit);
+            return twitDAO.findById(twitDAO.save(twit));
         } else {
             String errorMessage =  "Illegal arguments in form:\n" + String.join(" ", errors);
             logger.log(Level.WARNING, errorMessage);
 
-            return false;
+            return Optional.empty();
         }
     }
 
@@ -77,7 +78,7 @@ public class TwitService {
         return twitDAO.findById(id);
     }
 
-    public boolean updateTwit(TwitUpdateForm twitUpdateForm) {
+    public Optional<Twit> updateTwit(TwitUpdateForm twitUpdateForm) {
         List<String> errors = new TwitUpdateFormValidator().validate(twitUpdateForm);
 
         if(errors.isEmpty()) {
@@ -86,14 +87,15 @@ public class TwitService {
                     twitUpdateForm.getDescription(),
                     twitUpdateForm.getPhotoLink(),
                     twitUpdateForm.getHashTags().stream().map(Tag::new).collect(Collectors.toList()));
+
             twitDAO.update(twit);
 
-            return true;
+            return twitDAO.findById(twit.getId());
         } else {
             String errorMessage =  "Illegal arguments in form:\n" + String.join(" ", errors);
             logger.log(Level.WARNING, errorMessage);
 
-            return false;
+            return Optional.empty();
         }
     }
 

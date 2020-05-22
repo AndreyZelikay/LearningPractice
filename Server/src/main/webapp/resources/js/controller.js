@@ -51,12 +51,13 @@ class Controller {
             hashTags: event.target.parentElement.elements.hashTags.value
         };
 
-        if (!this._model.validatePost(post)) {
+        if (!this._model.validateForm(post)) {
             return;
         }
 
         try {
             post = await this._model.addPost(post);
+            post.createdAt = new Date(post.createdAt);
 
             if (this._postsOnScreen % 10 !== 0) {
                 this._view.displayPost(post);
@@ -69,8 +70,9 @@ class Controller {
         }
     }
 
-    refactorPostClick(event) {
-        const post = this._model.getPost(Number.parseInt(event.target.parentElement.parentElement.parentElement.id));
+    async refactorPostClick(event) {
+        const post = await this._model.getPost(Number.parseInt(event.target.parentElement.parentElement.parentElement.id));
+        localStorage.setItem('refactoringPost', JSON.stringify(post))
         this._view.displayRefactoring(post);
     }
 
@@ -82,17 +84,18 @@ class Controller {
         const updateForm = {
             description: refactorElement.elements.description.value,
             hashTags: refactorElement.elements.hashTags.value,
-            photoLink: refactorElement.elements.photoLink.value
         };
 
         if (!this._model.validateForm(updateForm)) {
             return;
         }
 
-        const currentPost = this._model.getPost(id);
+        const currentPost = JSON.parse(localStorage.getItem('refactoringPost'));
+        currentPost.createdAt = new Date(currentPost.createdAt);
 
         try {
             const refactoredPost = await this._model.editPost(id, updateForm);
+            refactoredPost.createdAt = new Date(refactoredPost.createdAt);
             this._view.replaceRefactorWithPost(refactorElement, refactoredPost);
         } catch (e) {
             this._view.replaceRefactorWithPost(refactorElement, currentPost);
@@ -123,11 +126,7 @@ class Controller {
         try {
             const response = await this._model.changeLikes(id);
 
-            if(response === 'increase') {
-                this._view.refreshPostLikes(id, true);
-            } else if(response === 'decrease') {
-                this._view.refreshPostLikes(id, false);
-            }
+            this._view.refreshPostLikes(id, response === 'inc');
         } catch (e) {
             alert(e);
         }
@@ -135,6 +134,8 @@ class Controller {
 
     async seeMoreClick(event) {
         try {
+            this._filters.skip = this._postsOnScreen;
+            this._filters.top = this._pagination;
             const posts = await this._model.getPage(this._filters);
             this._postsOnScreen += posts.length;
             this._view.displayPosts(posts);
@@ -156,9 +157,19 @@ class Controller {
 
         const formElements = filter.elements;
         const filters = {};
-        filters.author = formElements.author.value;
-        filters.fromDate = new Date(formElements.dateFrom.value);
-        filters.untilDate = new Date(formElements.dateTo.value);
+
+        if (formElements.author.value.length !== 0) {
+            filters.author = formElements.author.value;
+        }
+
+        if (formElements.dateFrom.value.length !== 0) {
+            filters.fromDate = formElements.dateFrom.value;
+        }
+
+        if (formElements.dateTo.value.length !== 0) {
+            filters.untilDate = formElements.dateTo.value;
+        }
+
         filters.hashTags = formElements.hashTags.value.split(' ').filter(tag => tag !== '');
         filters.skip = 0;
         filters.top = this._pagination;
@@ -177,7 +188,7 @@ class Controller {
 
     async loginEvent(event) {
         if (localStorage.getItem('user')) {
-            this.logOutClick();
+            await this.logOutClick();
         } else {
             await this.loginClick();
         }
@@ -186,38 +197,42 @@ class Controller {
     async loginClick(event) {
         const name = prompt('Input your login');
 
-        if(name.length === 0) {
+        if (name.length === 0) {
             alert('incorrect login');
             return;
         }
 
         try {
-            const user = this._model.findUserByName(name);
+            const user = await this._model.findUserByName(name);
+
+            if (user == null) {
+                return;
+            }
+
             localStorage.setItem('userName', user.name);
             localStorage.setItem('userId', user.id);
             this._view.displayCurrentUser(user.name);
             this._view.displayPostCreation();
-            this.refreshPostList();
+            await this.refreshPostList();
         } catch (e) {
             alert(e);
         }
     }
 
-    refreshPostList() {
+    async refreshPostList() {
         this._view.clearList();
-        const posts = this._model.getPage(0, 10);
-        this._filters = null;
+        const posts = await this._model.getPage(this._filters);
         this._view.clearFiltrationForm();
         this._postsOnScreen = posts.length;
         this._view.displayPosts(posts);
     }
 
-    logOutClick(event) {
+    async logOutClick(event) {
         this._view.displayLogIn();
         this._view.hidePostCreation();
         localStorage.removeItem('userName');
         localStorage.removeItem('userId');
-        this.refreshPostList();
+        await this.refreshPostList();
     }
 }
 

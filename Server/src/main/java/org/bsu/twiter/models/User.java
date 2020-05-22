@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User {
 
-    private Long id;
+    private long id;
     private String name;
 
     public User() {
@@ -15,11 +15,11 @@ public class User {
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return id.equals(user.id);
+        return id == user.id;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public UserDAOImpl() {
         connectionPool = ConnectionPool.getInstance();
@@ -48,17 +48,18 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean save(User object) {
+    public long save(User object) {
         try (Connection connection = connectionPool.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SQLQueries.SAVE_USER);
             statement.setString(1, object.getName());
+            statement.execute();
 
-            return statement.execute();
+            return getMaxUserId(connection);
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "connection error " + e.getMessage());
         }
 
-        return false;
+        return 0;
     }
 
     @Override
@@ -88,5 +89,29 @@ public class UserDAOImpl implements UserDAO {
         }
 
         return false;
+    }
+
+    @Override
+    public Optional<User> findUserByName(String name) {
+        try (Connection connection = connectionPool.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SQLQueries.FIND_USER_BY_NAME);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return Optional.of(DAOUtils.parseUserFromRS(resultSet));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "connection error " + e.getMessage());
+        }
+
+        return Optional.empty();
+    }
+
+    private static long getMaxUserId(Connection connection) throws SQLException {
+        try(PreparedStatement statement = connection.prepareStatement(SQLQueries.GET_MAX_USER_ID)){
+            ResultSet resultSet = statement.executeQuery();
+            return (resultSet.next()) ? resultSet.getLong("max") : 0;
+        }
     }
 }

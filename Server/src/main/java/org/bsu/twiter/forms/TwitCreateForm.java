@@ -9,15 +9,6 @@ public class TwitCreateForm {
     private String description;
     private List<String> hashTags;
     private long authorId;
-    private Date createdAt;
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 
     public long getAuthorId() {
         return authorId;

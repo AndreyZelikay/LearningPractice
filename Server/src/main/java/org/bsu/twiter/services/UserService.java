@@ -14,11 +14,15 @@ public class UserService {
         userDAO = new UserDAOImpl();
     }
 
-    public boolean saveUser(User user) {
-        return userDAO.save(user);
+    public Optional<User> saveUser(User user) {
+        return userDAO.findById(userDAO.save(user));
     }
 
     public Optional<User> findUserById(Long id) {
         return userDAO.findById(id);
+    }
+
+    public Optional<User> findUserByName(String name) {
+        return userDAO.findUserByName(name);
     }
 }

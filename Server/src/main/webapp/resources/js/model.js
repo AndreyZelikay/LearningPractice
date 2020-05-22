@@ -1,23 +1,8 @@
 class Model {
-    _posts;
 
-    constructor() {
-        this._posts = [];
+    _baseUrl = 'http://localhost:8080/Server_war';
 
-        let values = [];
-        let keys = Object.keys(localStorage);
-        let i = keys.length;
-
-        while (i--) {
-            if (Number.parseInt(keys[i])) {
-                let value = JSON.parse(localStorage.getItem(keys[i]));
-                value.createdAt = new Date(value.createdAt);
-                values.push(value);
-            }
-        }
-
-        this._posts = values.sort((a, b) => a.id - b.id);
-    }
+    constructor() {}
 
     _postSchema = {
         id: val => typeof val === 'number',
@@ -28,21 +13,6 @@ class Model {
         hashTags: val => typeof val === 'string' && (val.length > 0 && val.includes('#') || val.length === 0),
         likes: val => Array.isArray(val)
     };
-
-    validatePost(post) {
-        if (this._posts.find(p => post.id === p.id) != null) {
-            console.log('this id already exist');
-            return false;
-        }
-
-        if ((Math.abs(Object.keys(post).length - Object.keys(this._postSchema).length) === 1 && post['photoLink'] != null)
-            || Math.abs(Object.keys(post).length - Object.keys(this._postSchema).length) > 1) {
-            console.log('illegal arguments number');
-            return false;
-        }
-
-        return this.validateForm(post);
-    }
 
     validateForm(form) {
         let errors = Object.keys(form)
@@ -58,71 +28,80 @@ class Model {
     }
 
     async addPost(post) {
-        post.id = this._posts.length === 0 ? 1 : this._posts[this._posts.length - 1].id + 1;
-
         post.likes = [];
-        post.createdAt = new Date();
         post.author = localStorage.getItem('user');
         post.hashTags = post.hashTags.split("#").filter(tag => tag !== '');
 
-        return await fetch('tweets', {
-            method: 'Post',
+        console.log(JSON.stringify({
+            photoLink: post.photoLink,
+            description: post.description,
+            hashTags: post.hashTags,
+            authorId: localStorage.getItem('userId')
+        }));
+
+        return await (await fetch(this._baseUrl + '/tweets', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
             body: JSON.stringify({
                 photoLink: post.photoLink,
                 description: post.description,
                 hashTags: post.hashTags,
-                authorId: localStorage.getItem('userId'),
-                createdAt: post.createdAt.toLocaleString('en-US')
+                authorId: localStorage.getItem('userId')
             })
-        })
+        })).json()
     }
 
-    async changeLikes(post) {
-        return await fetch('/tweets/like',{
-            method: 'Post',
+    async changeLikes(id) {
+        return await (await fetch(this._baseUrl + '/tweets/like', {
+            method: 'POST',
             body: JSON.stringify({
-                twitId: post.id,
+                twitId: id,
                 userId: localStorage.getItem('userId')
-            })
-        });
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })).text();
     }
 
     async removePost(id) {
-        return await fetch('/tweets?id=' + id, {
+        return await fetch(this._baseUrl + '/tweets?id=' + id, {
             method: 'Delete'
         })
     }
 
     async getPost(id) {
-        return await fetch('/tweets?id=' + id, {
+        return await (await fetch(this._baseUrl + '/tweets?id=' + id, {
             method: 'Get'
-        })
+        })).json()
     }
 
     async getPage(filterConfig = {}) {
-        if(filterConfig.dateFrom) {
-            filterConfig.dateFrom = filterConfig.dateFrom.toLocaleString('en-US');
-        }
-        if(filterConfig.dateTo) {
-            filterConfig.dateTo = filterConfig.dateTo.toLocaleString('en-US');
-        }
-
-        return await fetch('/tweets/search', {
-            method: 'Post',
+        const posts = await (await fetch(this._baseUrl + '/tweets/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
             body: JSON.stringify(filterConfig)
-        })
+        })).json()
+
+        posts.forEach(post => post.createdAt = new Date(post.createdAt));
+
+        return posts;
     }
 
     async findUserByName(name) {
-        return await fetch('/user?name='+ name, {
+        return await (await fetch(this._baseUrl + '/user?name=' + name, {
             method: 'Get'
-        })
+        })).json()
     }
 
     async editPost(id, form) {
         form.hashTags = form.hashTags.split("#").filter(tag => tag !== '');
 
-        return await fetch('/tweets', {
+        return await (await fetch(this._baseUrl + '/tweets', {
             method: 'Put',
             body: JSON.stringify({
                 id: id,
@@ -130,6 +109,6 @@ class Model {
                 photoLink: form.photoLink,
                 hashTags: form.hashTags
             })
-        });
+        })).json();
     }
 }

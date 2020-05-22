@@ -13,7 +13,7 @@ public class TwitCreateFormValidator implements Validator<TwitCreateForm> {
     public List<String> validate(TwitCreateForm object) {
         List<String> errors = new ArrayList<>();
 
-        if(object.getAuthorId() == null) {
+        if(object.getAuthorId() == 0) {
             errors.add("author id field missed");
         }
         if(object.getDescription() == null || object.getDescription().isEmpty()) {
