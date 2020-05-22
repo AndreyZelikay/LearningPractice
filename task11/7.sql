@@ -1,0 +1,1 @@
+select datediff((select now()), (select min(created_at) from post));
