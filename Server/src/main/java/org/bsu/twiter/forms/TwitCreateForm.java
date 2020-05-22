@@ -8,7 +8,7 @@ public class TwitCreateForm {
     private String photoLink;
     private String description;
     private List<String> hashTags;
-    private Long authorId;
+    private long authorId;
     private Date createdAt;
 
     public Date getCreatedAt() {
@@ -19,11 +19,11 @@ public class TwitCreateForm {
         this.createdAt = createdAt;
     }
 
-    public Long getAuthorId() {
+    public long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthorId(long authorId) {
         this.authorId = authorId;
     }
 

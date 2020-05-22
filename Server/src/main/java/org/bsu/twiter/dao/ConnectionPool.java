@@ -17,21 +17,17 @@ public class ConnectionPool {
         try {
             LogManager.getLogManager().readConfiguration(TwitDAOImpl.class.getClassLoader().getResourceAsStream("logger.properties"));
             logger = Logger.getLogger(TwitDAOImpl.class.getName());
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
     private DataSource dataSource;
-    private static ConnectionPool instance = null;
 
     private ConnectionPool() {}
 
     public static ConnectionPool getInstance() {
-        if (instance==null) {
-            instance = new ConnectionPool();
-        }
-
-        return instance;
+        return new ConnectionPool();
     }
 
     public Connection getConnection() throws SQLException {

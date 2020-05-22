@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/tweets/search")
 public class TwitSearchServlet extends HttpServlet {
@@ -20,13 +21,13 @@ public class TwitSearchServlet extends HttpServlet {
     private TwitService twitService;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         twitService = new TwitService();
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String json = req.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
 

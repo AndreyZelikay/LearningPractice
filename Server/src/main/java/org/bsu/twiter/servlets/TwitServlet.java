@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @WebServlet("/tweets")
 public class TwitServlet extends HttpServlet {
@@ -21,20 +22,20 @@ public class TwitServlet extends HttpServlet {
     private TwitService twitService;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         twitService = new TwitService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Long id = null;
         try {
-             id = Long.parseLong(req.getParameter("id"));
+            id = Long.parseLong(req.getParameter("id"));
         } catch (NumberFormatException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
 
-        if(id != null) {
+        if (id != null) {
             Optional<Twit> twitOptional = twitService.getTwit(id);
 
             if (twitOptional.isPresent()) {
@@ -48,8 +49,8 @@ public class TwitServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String json = req.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
 
@@ -61,8 +62,9 @@ public class TwitServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
+
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         Long id = Long.parseLong(req.getParameter("id"));
 
         if (twitService.deleteTwit(id)) {
@@ -73,8 +75,8 @@ public class TwitServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String json = req.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
 

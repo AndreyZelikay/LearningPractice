@@ -3,8 +3,8 @@ package org.bsu.twiter.models;
 import java.util.Objects;
 
 public class Like {
-    private Long twitId;
-    private Long userId;
+    private long twitId;
+    private long userId;
 
     public Like() {}
 
@@ -13,19 +13,19 @@ public class Like {
         this.userId = userId;
     }
 
-    public Long getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public Long getTwitId() {
+    public long getTwitId() {
         return twitId;
     }
 
-    public void setTwitId(Long twitId) {
+    public void setTwitId(long twitId) {
         this.twitId = twitId;
     }
 
@@ -34,8 +34,8 @@ public class Like {
         if (this == o) return true;
         if (!(o instanceof Like)) return false;
         Like like = (Like) o;
-        return twitId.equals(like.twitId) &&
-                userId.equals(like.userId);
+        return twitId == like.twitId &&
+                userId == like.userId;
     }
 
     @Override

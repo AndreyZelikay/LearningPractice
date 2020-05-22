@@ -21,12 +21,14 @@ public class DAOUtils {
         twit.setDescription(resultSet.getString("description"));
         twit.setCreatedAt(new Date(resultSet.getTimestamp("created_at").getTime()));
         twit.setPhotoLink(resultSet.getString("photo_link"));
+
         if(resultSet.getString("tags") != null) {
             twit.setHashTags(Arrays.stream(resultSet.getString("tags").split(" "))
                     .filter(tag -> !tag.isEmpty())
                     .map(Tag::new)
                     .collect(Collectors.toList()));
         }
+
         if (resultSet.getString("likes") != null) {
             twit.setLikes(Arrays.stream(resultSet.getString("likes").split(" "))
                     .map(value -> new Like(twit.getId(), Long.parseLong(value)))

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class TwitLikeServlet extends HttpServlet {
 
@@ -20,7 +21,7 @@ public class TwitLikeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String json = req.getReader().lines().reduce("", (accumulator, actual) -> accumulator + actual);
+        String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
 
         Like like = objectMapper.readValue(json, Like.class);

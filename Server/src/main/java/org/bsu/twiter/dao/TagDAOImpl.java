@@ -18,7 +18,8 @@ public class TagDAOImpl implements TagDAO {
         try {
             LogManager.getLogManager().readConfiguration(TwitDAOImpl.class.getClassLoader().getResourceAsStream("logger.properties"));
             logger = Logger.getLogger(TwitDAOImpl.class.getName());
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
