@@ -31,6 +31,8 @@ public class SQLQueries {
 
     public static final String GET_MAX_TWIT_ID = "select max(post_id) as max from post";
 
+    public static final String GET_MAX_USER_ID = "select max(user_id) as max from user";
+
     public static final String SAVE_TWIT = "insert into post (post_id, user_id, description, created_at, photo_link) value (?,?,?,?,?)";
 
     public static final String SAVE_TAG = "insert into hash_tag (tag_id, body) VALUE (?,?)";
@@ -62,4 +64,6 @@ public class SQLQueries {
     public static final String DELETE_LIKE = "delete from post_like where post_id = ? and user_id = ?";
 
     public static final String FIND_LIKE = "select * from post_like where post_id = ? and user_id = ?";
+
+    public static final String FIND_USER_BY_NAME = "select * from user where name = ?";
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Twit {
-    private Long id;
+    private long id;
     private String description;
     private User author;
     private String photoLink;
@@ -38,11 +38,11 @@ public class Twit {
         this.createdAt = createdAt;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

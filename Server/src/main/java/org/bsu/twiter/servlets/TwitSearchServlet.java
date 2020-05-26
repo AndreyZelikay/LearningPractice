@@ -29,7 +29,7 @@ public class TwitSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
         TwitsFilterForm form = objectMapper.readValue(json, TwitsFilterForm.class);
         List<Twit> result = twitService.getTwits(form);

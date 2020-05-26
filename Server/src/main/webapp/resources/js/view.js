@@ -6,7 +6,7 @@ class View {
     _header = document.getElementById("header");
 
     _fillPostData(postTemplate, data) {
-        if (this._currentUser !== data.author) {
+        if (this._currentUser !== data.author.name) {
             postTemplate.querySelector('[class = "twit-buttons"]').setAttribute('style', 'display: none')
         }
 
@@ -21,9 +21,9 @@ class View {
         postTemplate.querySelector('[data-target = "user-icon"]').setAttribute('src', localStorage.getItem('userPhoto'));
         postTemplate.querySelector('[data-target = "description"]').textContent = data.description;
         postTemplate.querySelector('[data-target = "createdAt"]').textContent = data.createdAt.toLocaleDateString('en-US');
-        postTemplate.querySelector('[data-target = "author"]').textContent = data.author;
-        postTemplate.querySelector('[data-target = "hashTags"]').textContent = String(data.hashTags.map(item => '#' + item));
-        postTemplate.querySelector('[data-target = "likes"]').textContent = String(data.likes.length);
+        postTemplate.querySelector('[data-target = "author"]').textContent = data.author.name;
+        postTemplate.querySelector('[data-target = "hashTags"]').textContent = String(data.hashTags?.map(item => '#' + item.body) || []);
+        postTemplate.querySelector('[data-target = "likes"]').textContent = String((data.likes || []).length);
     }
 
     displayPost(post) {
@@ -37,7 +37,7 @@ class View {
     displayRefactoring(post) {
         const postRefactoring = document.importNode(this._postCreation, true);
 
-        postRefactoring.hashTags.value = String(post.hashTags.map(item => '#' + item).join(''));
+        postRefactoring.hashTags.value = String(post.hashTags.map(item => '#' + item.body).join(''));
         postRefactoring.description.value = post.description;
         postRefactoring.id = post.id;
 
@@ -65,10 +65,10 @@ class View {
         }
     }
 
-    refreshPostLikes(post) {
-        document.getElementById(post.id)
-            .querySelector('[data-target = "likes"]')
-            .textContent = String(post.likes.length);
+    refreshPostLikes(postId, isIncrease) {
+        let postLikes = document.getElementById(postId).querySelector('[data-target = "likes"]');
+        const numberLikes = Number.parseInt(postLikes.textContent);
+        postLikes.textContent = (isIncrease) ? String(numberLikes + 1) : String(numberLikes - 1);
     }
 
     displayPosts(posts) {

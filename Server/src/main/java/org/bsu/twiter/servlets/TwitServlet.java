@@ -52,15 +52,10 @@ public class TwitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
 
         TwitCreateForm form = objectMapper.readValue(json, TwitCreateForm.class);
 
-        if (twitService.saveTwit(form)) {
-            resp.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+        resp.getWriter().write(objectMapper.writeValueAsString(twitService.saveTwit(form).orElse(null)));
     }
 
     @Override
@@ -78,14 +73,9 @@ public class TwitServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
 
         TwitUpdateForm form = objectMapper.readValue(json, TwitUpdateForm.class);
 
-        if (twitService.updateTwit(form)) {
-            resp.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+        resp.getWriter().write(objectMapper.writeValueAsString(twitService.updateTwit(form).orElse(null)));
     }
 }
