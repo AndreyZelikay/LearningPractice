@@ -11,7 +11,7 @@ class Controller {
         this._filters = {
             skip: 0,
             top: this._pagination,
-        }
+        };
     }
 
     setPostsOnScreen(postsOnScreen) {
@@ -21,7 +21,7 @@ class Controller {
     async containerClickEvent(event) {
         switch (event.target.className) {
             case 'button-refactor':
-                this.refactorPostClick(event);
+                await this.refactorPostClick(event);
                 break;
             case 'button-delete':
                 await this.deletePostClick(event);
@@ -72,7 +72,7 @@ class Controller {
 
     async refactorPostClick(event) {
         const post = await this._model.getPost(Number.parseInt(event.target.parentElement.parentElement.parentElement.id));
-        localStorage.setItem('refactoringPost', JSON.stringify(post))
+        localStorage.setItem('refactoringPost', JSON.stringify(post));
         this._view.displayRefactoring(post);
     }
 
@@ -112,7 +112,7 @@ class Controller {
                 this._view.removePost(id);
             }
         } catch (e) {
-            alert(e)
+            alert(e);
         }
     }
 

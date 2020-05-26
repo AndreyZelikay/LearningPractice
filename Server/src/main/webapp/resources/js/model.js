@@ -50,7 +50,7 @@ class Model {
                 hashTags: post.hashTags,
                 authorId: localStorage.getItem('userId')
             })
-        })).json()
+        })).json();
     }
 
     async changeLikes(id) {
@@ -69,13 +69,13 @@ class Model {
     async removePost(id) {
         return await fetch(this._baseUrl + '/tweets?id=' + id, {
             method: 'Delete'
-        })
+        });
     }
 
     async getPost(id) {
         return await (await fetch(this._baseUrl + '/tweets?id=' + id, {
             method: 'Get'
-        })).json()
+        })).json();
     }
 
     async getPage(filterConfig = {}) {
@@ -85,7 +85,7 @@ class Model {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(filterConfig)
-        })).json()
+        })).json();
 
         posts.forEach(post => post.createdAt = new Date(post.createdAt));
 
@@ -95,7 +95,7 @@ class Model {
     async findUserByName(name) {
         return await (await fetch(this._baseUrl + '/user?name=' + name, {
             method: 'Get'
-        })).json()
+        })).json();
     }
 
     async editPost(id, form) {
