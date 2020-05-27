@@ -78,7 +78,13 @@ public class TwitService {
         return twitDAO.findById(id);
     }
 
-    public Optional<Twit> updateTwit(TwitUpdateForm twitUpdateForm) {
+    public Optional<Twit> updateTwit(TwitUpdateForm twitUpdateForm, Long userId) {
+        Optional<Twit> twitOptional = twitDAO.findById(twitUpdateForm.getId());
+
+        if(!twitOptional.isPresent() || twitOptional.get().getAuthor().getId() != userId) {
+            return Optional.empty();
+        }
+
         List<String> errors = new TwitUpdateFormValidator().validate(twitUpdateForm);
 
         if(errors.isEmpty()) {
@@ -99,7 +105,13 @@ public class TwitService {
         }
     }
 
-    public boolean deleteTwit(Long id) {
+    public boolean deleteTwit(Long id, Long userId) {
+        Optional<Twit> twitOptional = twitDAO.findById(id);
+
+        if(!twitOptional.isPresent() || twitOptional.get().getAuthor().getId() != userId) {
+            return false;
+        }
+
         return twitDAO.delete(id);
     }
 
