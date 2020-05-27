@@ -23,8 +23,9 @@ public class AuthorizationFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if(httpSession == null ||
-                httpSession.getCreationTime() - System.currentTimeMillis() > SecurityConstants.MAX_COOKIE_AGE * 1000) {
+        if (httpSession == null ||
+                httpSession.getCreationTime() - System.currentTimeMillis() > SecurityConstants.MAX_COOKIE_AGE * 1000 ||
+                httpSession.getAttribute("userId") == null) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
