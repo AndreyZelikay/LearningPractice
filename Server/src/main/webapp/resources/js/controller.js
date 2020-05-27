@@ -126,7 +126,7 @@ class Controller {
         try {
             const response = await this._model.changeLikes(id);
 
-            if(response !== 'inc' && response !== 'dec') {
+            if (response !== 'inc' && response !== 'dec') {
                 return;
             }
 
@@ -264,6 +264,25 @@ window.onload = async () => {
     document.getElementById('filtration').hashTags.addEventListener('input', (event) => controller.onFiltersChange(event));
     document.getElementById('login-button').addEventListener('click', (event) => controller.loginEvent(event));
     document.getElementById('login').addEventListener('submit', (event) => controller.loginSubmit(event));
+
+    const constantMock = window.fetch;
+
+    window.fetch = function () {
+        return new Promise((resolve, reject) => {
+            constantMock.apply(this, arguments)
+                .then((response) => {
+                    if (response.status === 403) {
+                        alert('your session expired');
+                        controller.logOutClick();
+                    }
+
+                    resolve(response);
+                })
+                .catch((error) => {
+                    reject(error);
+                })
+        });
+    }
 
     if (!localStorage.getItem('userName')) {
         view.displayLogInButton();
