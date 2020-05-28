@@ -1,5 +1,7 @@
 package org.bsu.twiter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class User {

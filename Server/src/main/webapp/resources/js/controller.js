@@ -265,9 +265,13 @@ window.onload = async () => {
     document.getElementById('login-button').addEventListener('click', (event) => controller.loginEvent(event));
     document.getElementById('login').addEventListener('submit', (event) => controller.loginSubmit(event));
 
-    const constantMock = window.fetch;
+    let constantMock = window.fetch;
 
     window.fetch = function () {
+        if(arguments[1].method.toUpperCase() === 'POST') {
+            arguments[1].body = btoa(arguments[1].body);
+        }
+
         return new Promise((resolve, reject) => {
             constantMock.apply(this, arguments)
                 .then((response) => {
