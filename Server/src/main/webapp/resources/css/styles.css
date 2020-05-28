@@ -1,3 +1,57 @@
+.login-window {
+	position: absolute;
+	visibility: hidden;
+	display: block;
+	right: 30px;
+	top: 80px;
+	z-index: 1;
+	width: 250px;
+	height: 160px;
+	border-radius: 10px;
+	background: rgba(255, 247, 247, 0.97);
+	border: 1px solid #AFB5BD;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.user-name-input, .password-input {
+	position: relative;
+	display: inline-block;
+	left: calc(7% / 2);
+	top: 0;
+	width: 90%;
+	height: 70%;
+	border-radius: 20px;
+	outline: none;
+	text-indent: 10px;
+}
+
+.login-button {
+	position: relative;
+	display: block;
+	width: 50%;
+	left: calc(50% / 2);
+	margin-top: 20px;
+	height: 20px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	background: forestgreen;
+}
+
+.password-input-label, .name-input-label {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 30%;
+	text-align: left;
+	text-indent: calc(7% / 2);
+	font-family: Oxygen, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1rem;
+}
+
 .user-icon {
 	position: absolute;
 	border-radius: 100%;

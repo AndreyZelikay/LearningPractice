@@ -5,5 +5,5 @@ import org.bsu.twiter.models.User;
 import java.util.Optional;
 
 public interface UserDAO extends CRUD<User> {
-    Optional<User> findUserByName(String name);
+    Optional<User> findUserByNameAndPassword(String name, String password);
 }

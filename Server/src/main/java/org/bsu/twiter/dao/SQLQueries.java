@@ -65,5 +65,5 @@ public class SQLQueries {
 
     public static final String FIND_LIKE = "select * from post_like where post_id = ? and user_id = ?";
 
-    public static final String FIND_USER_BY_NAME = "select * from user where name = ?";
+    public static final String FIND_USER_BY_NAME_AND_PASSWORD = "select * from user where name = ? and password = ?";
 }

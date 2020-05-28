@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @WebServlet("/tweets/search")
@@ -35,5 +36,27 @@ public class TwitSearchServlet extends HttpServlet {
         List<Twit> result = twitService.getTwits(form);
 
         resp.getWriter().write(objectMapper.writeValueAsString(result));
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Long id = null;
+        try {
+            id = Long.parseLong(req.getParameter("id"));
+        } catch (NumberFormatException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+
+        if (id != null) {
+            Optional<Twit> twitOptional = twitService.getTwit(id);
+
+            if (twitOptional.isPresent()) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
+                resp.getWriter().write(objectMapper.writeValueAsString(twitOptional.get()));
+            } else {
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
+        }
     }
 }

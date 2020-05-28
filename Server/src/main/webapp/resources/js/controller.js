@@ -126,13 +126,17 @@ class Controller {
         try {
             const response = await this._model.changeLikes(id);
 
+            if (response !== 'inc' && response !== 'dec') {
+                return;
+            }
+
             this._view.refreshPostLikes(id, response === 'inc');
         } catch (e) {
             alert(e);
         }
     }
 
-    async seeMoreClick(event) {
+    async seeMoreClick() {
         try {
             this._filters.skip = this._postsOnScreen;
             this._filters.top = this._pagination;
@@ -186,31 +190,42 @@ class Controller {
         }
     }
 
-    async loginEvent(event) {
-        if (localStorage.getItem('user')) {
+    async loginEvent() {
+        if (localStorage.getItem('userName')) {
             await this.logOutClick();
         } else {
-            await this.loginClick();
+            this.loginClick();
         }
     }
 
-    async loginClick(event) {
-        const name = prompt('Input your login');
+    loginClick() {
+        this._view.displayLoginWindow();
+    }
 
-        if (name.length === 0) {
+    async loginSubmit(event) {
+        event.preventDefault();
+
+        let user = {
+            name: event.target.elements.name.value,
+            password: event.target.elements.password.value
+        };
+
+        if (user.name.length === 0 || user.password.length === 0) {
             alert('incorrect login');
             return;
         }
 
         try {
-            const user = await this._model.findUserByName(name);
+            user = await this._model.loginUser(user);
 
             if (user == null) {
+                alert('invalid name or password');
                 return;
             }
 
             localStorage.setItem('userName', user.name);
-            localStorage.setItem('userId', user.id);
+            event.target.reset();
+            this._view.hideLoginWindow();
             this._view.displayCurrentUser(user.name);
             this._view.displayPostCreation();
             await this.refreshPostList();
@@ -227,11 +242,11 @@ class Controller {
         this._view.displayPosts(posts);
     }
 
-    async logOutClick(event) {
-        this._view.displayLogIn();
+    async logOutClick() {
+        this._view.displayLogInButton();
         this._view.hidePostCreation();
         localStorage.removeItem('userName');
-        localStorage.removeItem('userId');
+        await this._model.logOutUser();
         await this.refreshPostList();
     }
 }
@@ -248,9 +263,33 @@ window.onload = async () => {
     document.getElementById('filtration').addEventListener('change', (event) => controller.onFiltersChange(event));
     document.getElementById('filtration').hashTags.addEventListener('input', (event) => controller.onFiltersChange(event));
     document.getElementById('login-button').addEventListener('click', (event) => controller.loginEvent(event));
+    document.getElementById('login').addEventListener('submit', (event) => controller.loginSubmit(event));
+
+    let constantMock = window.fetch;
+
+    window.fetch = function () {
+        if(arguments[1].method.toUpperCase() === 'POST') {
+            arguments[1].body = btoa(arguments[1].body);
+        }
+
+        return new Promise((resolve, reject) => {
+            constantMock.apply(this, arguments)
+                .then((response) => {
+                    if (response.status === 403) {
+                        alert('your session expired');
+                        controller.logOutClick();
+                    }
+
+                    resolve(response);
+                })
+                .catch((error) => {
+                    reject(error);
+                })
+        });
+    }
 
     if (!localStorage.getItem('userName')) {
-        view.displayLogIn();
+        view.displayLogInButton();
     } else {
         view.displayCurrentUser(localStorage.getItem('userName'));
         view.displayPostCreation();

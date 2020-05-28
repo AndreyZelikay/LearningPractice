@@ -2,7 +2,8 @@ class Model {
 
     _baseUrl = 'http://localhost:8080/Server_war';
 
-    constructor() {}
+    constructor() {
+    }
 
     _postSchema = {
         id: val => typeof val === 'number',
@@ -28,17 +29,6 @@ class Model {
     }
 
     async addPost(post) {
-        post.likes = [];
-        post.author = localStorage.getItem('user');
-        post.hashTags = post.hashTags.split("#").filter(tag => tag !== '');
-
-        console.log(JSON.stringify({
-            photoLink: post.photoLink,
-            description: post.description,
-            hashTags: post.hashTags,
-            authorId: localStorage.getItem('userId')
-        }));
-
         return await (await fetch(this._baseUrl + '/tweets', {
             method: 'POST',
             headers: {
@@ -47,22 +37,14 @@ class Model {
             body: JSON.stringify({
                 photoLink: post.photoLink,
                 description: post.description,
-                hashTags: post.hashTags,
-                authorId: localStorage.getItem('userId')
+                hashTags: post.hashTags.split("#").filter(tag => tag !== '')
             })
         })).json();
     }
 
     async changeLikes(id) {
-        return await (await fetch(this._baseUrl + '/tweets/like', {
-            method: 'POST',
-            body: JSON.stringify({
-                twitId: id,
-                userId: localStorage.getItem('userId')
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            }
+        return await (await fetch(this._baseUrl + '/tweets/like?postId=' + id, {
+            method: 'Get',
         })).text();
     }
 
@@ -73,7 +55,7 @@ class Model {
     }
 
     async getPost(id) {
-        return await (await fetch(this._baseUrl + '/tweets?id=' + id, {
+        return await (await fetch(this._baseUrl + '/tweets/search?id=' + id, {
             method: 'Get'
         })).json();
     }
@@ -92,10 +74,23 @@ class Model {
         return posts;
     }
 
-    async findUserByName(name) {
-        return await (await fetch(this._baseUrl + '/user?name=' + name, {
-            method: 'Get'
+    async loginUser(user) {
+        return await (await fetch(this._baseUrl + '/login', {
+            method: 'Post',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
         })).json();
+    }
+
+    async logOutUser() {
+        return await fetch(this._baseUrl + '/login', {
+            method: 'Get',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
     }
 
     async editPost(id, form) {

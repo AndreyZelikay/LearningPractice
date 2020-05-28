@@ -92,10 +92,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findUserByName(String name) {
+    public Optional<User> findUserByNameAndPassword(String name, String password) {
         try (Connection connection = connectionPool.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQLQueries.FIND_USER_BY_NAME);
+            PreparedStatement statement = connection.prepareStatement(SQLQueries.FIND_USER_BY_NAME_AND_PASSWORD);
             statement.setString(1, name);
+            statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {

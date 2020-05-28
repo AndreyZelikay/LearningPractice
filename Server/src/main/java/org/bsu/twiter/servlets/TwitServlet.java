@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
@@ -27,33 +28,15 @@ public class TwitServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Long id = null;
-        try {
-            id = Long.parseLong(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
-
-        if (id != null) {
-            Optional<Twit> twitOptional = twitService.getTwit(id);
-
-            if (twitOptional.isPresent()) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm a z"));
-                resp.getWriter().write(objectMapper.writeValueAsString(twitOptional.get()));
-            } else {
-                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            }
-        }
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String json = req.getReader().lines().collect(Collectors.joining());
         ObjectMapper objectMapper = new ObjectMapper();
 
         TwitCreateForm form = objectMapper.readValue(json, TwitCreateForm.class);
+
+        HttpSession session = req.getSession(false);
+
+        form.setAuthorId((Long) session.getAttribute("userId"));
 
         resp.getWriter().write(objectMapper.writeValueAsString(twitService.saveTwit(form).orElse(null)));
     }
@@ -62,7 +45,9 @@ public class TwitServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         Long id = Long.parseLong(req.getParameter("id"));
 
-        if (twitService.deleteTwit(id)) {
+        HttpSession session = req.getSession(false);
+
+        if (twitService.deleteTwit(id, (Long) session.getAttribute("userId"))) {
             resp.setStatus(HttpServletResponse.SC_OK);
         } else {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -76,6 +61,8 @@ public class TwitServlet extends HttpServlet {
 
         TwitUpdateForm form = objectMapper.readValue(json, TwitUpdateForm.class);
 
-        resp.getWriter().write(objectMapper.writeValueAsString(twitService.updateTwit(form).orElse(null)));
+        HttpSession session = req.getSession(false);
+
+        resp.getWriter().write(objectMapper.writeValueAsString(twitService.updateTwit(form, (Long) session.getAttribute("userId")).orElse(null)));
     }
 }

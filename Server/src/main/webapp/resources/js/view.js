@@ -4,6 +4,7 @@ class View {
     _postContainer = document.getElementById('container');
     _postCreation = document.getElementById('twitAdd');
     _header = document.getElementById("header");
+    _loginWindow = document.getElementById("loginWindow")
 
     _fillPostData(postTemplate, data) {
         if (this._currentUser !== data.author.name) {
@@ -93,11 +94,19 @@ class View {
         }
     }
 
-    displayLogIn() {
+    displayLogInButton() {
         this._currentUser = '';
         this._header.querySelector('[class = "my-profile"]')
             .setAttribute('style', 'display: none');
         this._header.querySelector('[class = "button log-out"]').firstElementChild.textContent = 'Log in';
+    }
+
+    displayLoginWindow() {
+         this._loginWindow.setAttribute('style', 'visibility: visible');
+    }
+
+    hideLoginWindow() {
+        this._loginWindow.setAttribute('style', 'visibility: hidden');
     }
 
     hidePostCreation() {
